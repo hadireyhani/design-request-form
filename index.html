@@ -898,10 +898,44 @@
         const loadingSection = document.getElementById('loadingSection');
         const successSection = document.getElementById('successSection');
 
-        // Telegram Bot Configuration
-        const TELEGRAM_BOT_TOKEN = '';
-        const TELEGRAM_CHAT_ID = ''; // باید Chat ID خودت رو بذاری
+       // 🔹 Web3Forms Configuration
+       const WEB3FORMS_ACCESS_KEY = "service_x1w6a1j"; // کلید سرویس شماخودت رو بذاری
+form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
+        // نمایش حالت بارگذاری
+        formContent.style.display = "none";
+        loadingSection.classList.add("show");
+
+        // جمع‌آوری داده‌ها
+        const formData = new FormData(form);
+        formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            // پنهان‌کردن لودینگ
+            loadingSection.classList.remove("show");
+
+            if (result.success) {
+                // نمایش پیام موفقیت
+                successSection.classList.add("show");
+            } else {
+                alert("خطا در ارسال فرم. لطفاً دوباره تلاش کنید.");
+                formContent.style.display = "block";
+            }
+        } catch (error) {
+            console.error(error);
+            alert("مشکلی در ارتباط با سرور پیش آمد. لطفاً مجدداً تلاش کنید.");
+            formContent.style.display = "block";
+            loadingSection.classList.remove("show");
+        }
+    });
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
