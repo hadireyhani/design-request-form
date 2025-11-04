@@ -1,402 +1,411 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>هادی ریحانی | طراح گرافیک و توسعه‌دهنده وب</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <style>
-    :root {
-      --bg: #0a0a1a;
-      --card: rgba(20, 20, 40, 0.7);
-      --text: #e0e0ff;
-      --text-light: #a0a0cc;
-      --primary: #7b00ff;
-      --secondary: #00d4ff;
-      --border: rgba(123, 0, 255, 0.2);
-    }
-    [data-theme="light"] {
-      --bg: #f8f9ff;
-      --card: rgba(255, 255, 255, 0.9);
-      --text: #1a1a2e;
-      --text-light: #555;
-      --primary: #5e00cc;
-      --secondary: #00aaff;
-      --border: rgba(94, 0, 204, 0.15);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Vazirmatn', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
-      transition: all 0.4s;
-      overflow-x: hidden;
-      position: relative;
-    }
-    html { scroll-behavior: smooth; }
-
-    /* Floating Background */
-    .bg-float {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: -1;
-      background: radial-gradient(circle at 20% 80%, rgba(123, 0, 255, 0.1), transparent 40%),
-                  radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1), transparent 40%);
-    }
-    .float-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      opacity: 0.1;
-      filter: blur(40px);
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 1.5rem;
-      left: 1.5rem;
-      z-index: 1001;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 0.6rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .theme-toggle:hover { transform: translateY(-3px) scale(1.05); }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1.2rem 5%;
-      background: rgba(10, 10, 26, 0.85);
-      backdrop-filter: blur(15px);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-      transition: all 0.3s;
-    }
-    [data-theme="light"] .navbar { background: rgba(248, 249, 255, 0.9); }
-    .navbar.scrolled { padding: 0.8rem 5%; background: rgba(10, 10, 26, 0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-    [data-theme="light"] .navbar.scrolled { background: rgba(248, 249, 255, 0.98); }
-    .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.7rem; font-weight: 700; background: linear-gradient(to right, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { color: var(--text-light); text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--secondary); }
-    .nav-links a::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s; }
-    .nav-links a:hover::after { width: 100%; }
-
-    /* Hero */
-    .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 5%; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(123, 0, 255, 0.06), rgba(0, 212, 255, 0.06)); pointer-events: none; }
-    .hero-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; z-index: 2; }
-    .hero-content h1 { font-size: 4.5rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--secondary), var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; animation: gradient 3s ease infinite; }
-    @keyframes gradient { 0%,100%{background-position:0%} 50%{background-position:100%} }
-    .hero-image { border-radius: 25px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.4); transform: perspective(1000px) rotateY(-5deg); transition: 0.5s; }
-    .hero-image:hover { transform: perspective(1000px) rotateY(0) translateY(-10px); }
-    .hero-image img { width: 100%; transition: 0.5s; }
-    .hero-image:hover img { transform: scale(1.05); }
-
-    /* Tilt Card */
-    .tilt-card { transition: transform 0.3s; }
-    .tilt-card:hover { transform: translateY(-10px) rotateX(5deg) rotateY(5deg); }
-
-    /* Sections */
-    section { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; opacity: 0; transform: translateY(50px); }
-    section.revealed { opacity: 1; transform: translateY(0); transition: all 1s ease; }
-
-    .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 4rem; background: linear-gradient(to right, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; }
-    .section-title::after { content: ''; position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; background: linear-gradient(to right, var(--primary), var(--secondary)); border-radius: 2px; }
-
-    /* Services */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .service-card { background: var(--card); padding: 2.5rem; border-radius: 25px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(12px); }
-    .service-card:hover { transform: translateY(-18px); box-shadow: 0 30px 60px rgba(123, 0, 255, 0.2); border-color: var(--secondary); }
-    .service-icon { font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(to bottom, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    /* Portfolio */
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-    .portfolio-item img { width: 100%; height: 280px; object-fit: cover; transition: 0.4s; }
-    .portfolio-item:hover img { transform: scale(1.1); }
-    .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); display: flex; flex-direction: column; justify-content: end; padding: 1.5rem; color: white; opacity: 0; transition: 0.4s; }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-
-    /* Form */
-    .form-container { background: var(--card); padding: 3.5rem; border-radius: 30px; border: 1px solid var(--border); backdrop-filter: blur(15px); box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
-    .form-group { position: relative; }
-    .form-group label { position: absolute; top: -12px; right: 25px; background: var(--bg); padding: 0 12px; font-size: 0.95rem; color: var(--secondary); font-weight: 500; }
-    input, textarea, select { width: 100%; padding: 1.2rem 1.8rem; border-radius: 18px; border: 1px solid var(--border); background: rgba(30, 30, 60, 0.5); color: var(--text); transition: 0.3s; }
-    [data-theme="light"] input, [data-theme="light"] textarea, [data-theme="light"] select { background: rgba(255, 255, 255, 0.7); }
-    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 25px rgba(0, 212, 255, 0.2); }
-    .submit-btn { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 1.3rem 3.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: 0.4s; width: 100%; margin-top: 1.5rem; box-shadow: 0 12px 35px rgba(123, 0, 255, 0.3); }
-    .submit-btn:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 25px 50px rgba(123, 0, 255, 0.4); }
-
-    /* Success */
-    .success-message { text-align: center; padding: 3.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 25px; border: 1px solid rgba(0, 212, 255, 0.3); display: none; }
-    .success-message.show { display: block; animation: fadeIn 0.6s; }
-
-    /* Footer */
-    footer { text-align: center; padding: 4rem 5%; color: var(--text-light); font-size: 0.95rem; border-top: 1px solid var(--border); margin-top: 6rem; }
-
-    @media (max-width: 992px) {
-      .hero-container, .about { grid-template-columns: 1fr; text-align: center; }
-      .hero-image, .about img { max-width: 380px; margin: 0 auto; }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  </style>
-</head>
-<body data-theme="dark">
-
-  <!-- Floating Background -->
-  <div class="bg-float" id="bgFloat"></div>
-
-  <!-- Theme Toggle -->
-  <div class="theme-toggle" id="themeToggle">
-    <i class="fas fa-moon"></i>
-    <span>تم دارک</span>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <div class="logo">هادی ریحانی</div>
-      <div class="nav-links">
-        <a href="#home">خانه</a>
-        <a href="#about">درباره</a>
-        <a href="#services">خدمات</a>
-        <a href="#portfolio">پورتفولیو</a>
-        <a href="#contact">تماس</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1>هادی ریحانی</h1>
-        <p class="text-xl mb-4 text-purple-300">طراح گرافیک • توسعه‌دهنده وب</p>
-        <p>۱۰+ سال تجربه در خلق برندهای دیجیتال حرفه‌ای و وب‌سایت‌های مدرن</p>
-        <div class="mt-6">
-          <a href="#contact" class="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-bold text-white">شروع همکاری</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h2 class="section-title">درباره من</h2>
-        <p class="mb-4">من هادی ریحانی هستم، طراح گرافیک و توسعه‌دهنده وب با بیش از ۱۰ سال تجربه. تخصص من در خلق هویت بصری قدرتمند، طراحی وب‌سایت‌های حرفه‌ای و توسعه سیستم‌های دیجیتال است.</p>
-        <p>از لوگو و برندینگ تا فروشگاه‌های آنلاین و اپلیکیشن‌های موبایل، همیشه به دنبال بهترین راه‌حل برای نیازهای شما هستم.</p>
-      </div>
-      <img src="https://i.imgur.com/8kL5m9P.jpg" alt="هادی ریحانی در حال کار" class="rounded-3xl shadow-2xl">
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services">
-    <h2 class="section-title">خدمات من</h2>
-    <div class="services-grid">
-      <div class="service-card tilt-card">
-        <div class="service-icon">Paintbrush</div>
-        <h3>طراحی گرافیک</h3>
-        <p>لوگو، هویت بصری، بنر، پوستر، کاتالوگ و بروشور</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon">Laptop</div>
-        <h3>طراحی وب‌سایت</h3>
-        <p>وب‌سایت شرکتی، فروشگاه آنلاین، لندینگ پیج</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon">Wordpress</div>
-        <h3>توسعه وردپرس</h3>
-        <p>سفارشی‌سازی، بهینه‌سازی، افزونه و قالب</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <h2 class="section-title">نمونه کارها</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800" alt="">
-        <div class="portfolio-overlay">
-          <h3>برندینگ استارت‌آپ فین‌تک</h3>
-          <p>لوگو، کارت ویزیت، راهنمای برند</p>
-        </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="">
-        <div class="portfolio-overlay">
-          <h3>وب‌سایت شرکتی مدرن</h3>
-          <p>React + Tailwind CSS</p>
-        </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800" alt="">
-        <div class="portfolio-overlay">
-          <h3>فروشگاه آنلاین ووکامرس</h3>
-          <p>پرداخت آنلاین + ارسال</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <h2 class="section-title">درخواست پروژه</h2>
-    <div class="form-container">
-      <form id="contactForm">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>نام *</label>
-            <input type="text" name="name" required placeholder="نام شما">
-          </div>
-          <div class="form-group">
-            <label>ایمیل *</label>
-            <input type="email" name="email" required placeholder="example@domain.com">
-          </div>
-          <div class="form-group">
-            <label>تلفن *</label>
-            <input type="tel" name="phone" required placeholder="09123456789">
-          </div>
-          <div class="form-group">
-            <label>خدمت *</label>
-            <select name="service" required>
-              <option value="">انتخاب کنید</option>
-              <option>طراحی گرافیک</option>
-              <option>وب‌سایت</option>
-              <option>وردپرس</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>توضیحات *</label>
-          <textarea name="message" required rows="5" placeholder="جزئیات پروژه، بودجه، مهلت..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">ارسال درخواست</button>
-      </form>
-      <div id="successMessage" class="success-message">
-        <h3>درخواست شما ثبت شد!</h3>
-        <p>به زودی با شما تماس می‌گیریم</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 هادی ریحانی. تمامی حقوق محفوظ است.</p>
-    <p class="mt-2">
-      <a href="tel:09159779499" class="text-purple-400">09159779499</a> | 
-      <a href="mailto:h.reyhani@ymail.com" class="text-purple-400">h.reyhani@ymail.com</a> | 
-      <a href="https://t.me/hadireyhani" class="text-purple-400">@hadireyhani</a>
-    </p>
-  </footer>
-
-  <script>
-    // Theme Toggle
-    const toggle = document.getElementById('themeToggle');
-    const body = document.body;
-    const icon = toggle.querySelector('i');
-    const text = toggle.querySelector('span');
-    toggle.addEventListener('click', () => {
-      const isDark = body.getAttribute('data-theme') === 'dark';
-      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
-      text.textContent = isDark ? 'تم لایت' : 'تم دارک';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    });
-    const saved = localStorage.getItem('theme') || 'dark';
-    body.setAttribute('data-theme', saved);
-    if (saved === 'light') { icon.classList.replace('fa-moon', 'fa-sun'); text.textContent = 'تم لایت'; }
-
-    // Navbar Scroll
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Floating Background
-    const bgFloat = document.getElementById('bgFloat');
-    for (let i = 0; i < 6; i++) {
-      const circle = document.createElement('div');
-      circle.className = 'float-circle';
-      circle.style.width = circle.style.height = `${Math.random() * 300 + 100}px`;
-      circle.style.left = `${Math.random() * 100}%`;
-      circle.style.top = `${Math.random() * 100}%`;
-      circle.style.animation = `float ${15 + i * 5}s ease-in-out infinite`;
-      bgFloat.appendChild(circle);
-    }
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes float {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-100px) rotate(180deg); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Scroll Reveal + Parallax
-    gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('section').forEach(sec => {
-      gsap.to(sec, {
-        scrollTrigger: {
-          trigger: sec,
-          start: "top 80%",
-          onEnter: () => sec.classList.add('revealed')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم درخواست طراحی سایت | MBZUAI IFM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
-      });
-    });
 
-    // 3D Tilt on Cards
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
+        body {
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
 
-    // Form
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('.submit-btn');
-      btn.innerHTML = 'در حال ارسال...';
-      btn.disabled = true;
-      setTimeout(() => {
-        this.style.display = 'none';
-        document.getElementById('successMessage').classList.add('show');
-      }, 1500);
-    });
-  </script>
+        /* ناوبری */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            color: #2d3748;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #2563eb;
+        }
+
+        /* همگرایی بخش‌ها (Scrollspy) */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 0;
+        }
+
+        /* بخش هوم */
+        #home {
+            background: linear-gradient(180deg, #fff 50%, rgba(37, 99, 235, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5rem 5%;
+            overflow: hidden;
+        }
+
+        .home-content {
+            flex: 1;
+        }
+
+        .home-text h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .home-text p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .home-img {
+            flex: 1;
+            max-width: 600px;
+            margin-left: 2rem;
+            animation: slideIn 1s ease-in;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* بخش فرم درخواست */
+        #request-form {
+            background: white;
+            padding: 5rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .form-title {
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        textarea {
+            min-height: 150px;
+        }
+
+        .upload-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .form-group.required label::after {
+            content: "*";
+            color: #e53e3e;
+            margin-left: 3px;
+        }
+
+        button.submit-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 2rem;
+            transition: background 0.3s;
+        }
+
+        button.submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* بخش درباره ما */
+        #about {
+            padding: 5rem 5%;
+            background: #fff;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* بخش تماس */
+        #contact {
+            background: #2563eb;
+            color: white;
+            padding: 5rem 5%;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 2rem 0;
+        }
+
+        .contact-info i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .contact-map {
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .nav-links { gap: 1rem; justify-content: center; }
+            #home .home-content, #home .home-img { flex: 1; }
+            #home .home-img { margin-left: 0; margin-top: 2rem; }
+            .form-container { width: 100%; }
+            #about .about-container, #contact .contact-container { padding: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ناوبری -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home">خانه</a>
+            <a href="#request-form">درخواست طراحی</a>
+            <a href="#about">درباره ما</a>
+            <a href="#contact">تماس</a>
+        </div>
+    </nav>
+
+    <!-- بخش هوم -->
+    <section class="section" id="home">
+        <div class="home-content">
+            <div class="home-text">
+                <h1>مسولیت طراحی سایت‌های مدرن به ما بگذارید</h1>
+                <p>با تیمی از طراحان و توسعه‌دهندگان مجرب، دارای سابقه در طراحی ویب سایت‌ها، برنامه‌های موبایل و سرویس‌های برند، برای شما پیشنهادهای انعطاف‌پذیر و مبتنی بر نیازهای واقعی ارائه می‌دهیم.</p>
+                <a href="#request-form" class="cta-btn">ارسال درخواست</a>
+            </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" 
+             alt="طراحی سایت" class="home-img">
+    </section>
+
+    <!-- بخش فرم درخواست -->
+    <section class="section" id="request-form">
+        <div class="form-container">
+            <div class="form-title">فرم درخواست طراحی</div>
+            <form id="designForm">
+                <!-- نام -->
+                <div class="form-group required">
+                    <label for="name">نام کامل *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <!-- ایمیل -->
+                <div class="form-group required">
+                    <label for="email">آدرس ایمیل *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- شرکت -->
+                <div class="form-group">
+                    <label for="company">نام شرکت/گروه (اختیاری)</label>
+                    <input type="text" id="company" name="company">
+                </div>
+
+                <!-- نوع پروژه -->
+                <div class="form-group required">
+                    <label for="projectType">نوع پروژه *</label>
+                    <select id="projectType" name="projectType" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="website">ویب سایت</option>
+                        <option value="mobile">اپلیکیشن موبایل</option>
+                        <option value="branding">برندینگ</option>
+                        <option value="other">دیگر</option>
+                    </select>
+                </div>
+
+                <!-- توضیحات -->
+                <div class="form-group required">
+                    <label for="description">توضیحات پروژه *</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+
+                <!-- آپلود عکس -->
+                <div class="form-group">
+                    <label for="fileUpload">عکس/پیوست (اختیاری)</label>
+                    <input type="file" id="fileUpload" name="fileUpload" accept="image/*">
+                    <button type="button" class="upload-btn">آپلود فایل</button>
+                </div>
+
+                <!-- تأیید قوانین -->
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" required>
+                        من قوانین و شرایط استفاده را مطالعه و پذیرش می‌کنم.
+                    </label>
+                </div>
+
+                <!-- دکمه ارسال -->
+                <button type="submit" class="submit-btn">ارسال درخواست</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- بخش درباره ما -->
+    <section class="section" id="about">
+        <div class="about-container">
+            <h2>درباره ما</h2>
+            <img src="https://images.unsplash.com/photo-1556916008-71d5a81a711c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                 alt="تیم طراحان" class="about-img">
+            <p>ما یک تیم متخصص در طراحی و توسعه سایت‌های اینترنتی هستیم. با تکنولوژی‌های جدید و تمرکز بر کاربری و سرعت، هدف ما ارائه سایت‌هایی است که نه تنها زیبا و انعطاف‌پذیر هستند، بلکه همچنین به نیازهای تجاری و سیوئی شما بخورند.</p>
+            <p>با ۵ سال سابقه کار در صنعت تکنولوژی، ما بیش از ۱۰۰ پروژه موفقیت‌آمیز طراحی و اجرا کرده‌ایم.</p>
+        </div>
+    </section>
+
+    <!-- بخش تماس -->
+    <section class="section" id="contact">
+        <div class="contact-container">
+            <h2>تماس با ما</h2>
+            <div class="contact-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>مجمع امارات مرکزی، ابوظبی، امارات متحده عربی</span>
+            </div>
+            <div class="contact-info">
+                <i class="fas fa-phone"></i>
+                <span>+971 50 123 4567</span>
+            </div>
+            <div class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <span>contact@ifm-mbzuai.com</span>
+            </div>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Abu+Dhabi&zoom=10&size=600x300&maptype=roadmap&key=YOUR_GOOGLE_MAPS_KEY" 
+                 alt="نقشه محل" class="contact-map">
+            <p>میتوانید از طریق فرم زیر یا مکان‌ها با ما در تماس باشید. پاسخگویی در ده دقیقه بعد از دریافت درخواست!</p>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <p>© 2023 MBZUAI IFM Design Studio. تمامی حقوق محفوظ است.</p>
+        <div>طراحی شده توسط: <a href="https://mbzuai.ie.edu/" style="color: white;">MBZUAI Institute of Foundation Models</a></div>
+    </footer>
+
+    <script>
+        // اعتبارسنجی فرم (مثالی)
+        document.getElementById('designForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+            // در اینجا میتوانید داده‌ها را به سرور ارسال کنید (مثال: fetch())
+            alert('درخواست شما با موفقیت ارسال شد!');
+            form.reset();
+        });
+
+        // دکمه آپلود (فعالیت کلیک)
+        document.querySelector('.upload-btn').addEventListener('click', function() {
+            document.getElementById('fileUpload').click();
+        });
+    </script>
 </body>
 </html>
