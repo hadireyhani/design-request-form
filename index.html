@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فرم درخواست طراحی سایت | MBZUAI IFM</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MBZUAI IFM | طراحی سایت مدرن</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2563eb;       /* رنگ اصلی (آبی) */
+            --secondary-color: #f8fafc;    /* پیش‌رنگ خفیف */
+            --text-dark: #111827;          /* متن تیره */
+            --text-light: #4a5568;        /* متن روشن */
+            --border-radius: 12px;         /* شیب مرزها */
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* شاد در حد */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +24,8 @@
         }
 
         body {
-            background-color: #f8f9fa;
             line-height: 1.6;
+            transition: background-color 0.3s ease;
         }
 
         /* ناوبری */
@@ -25,292 +34,332 @@
             top: 0;
             width: 100%;
             background: white;
-            padding: 1rem 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem 5%;
+            box-shadow: var(--box-shadow);
             z-index: 1000;
+            backdrop-filter: blur(10px); /* اثر شیشه‌ای */
         }
 
         .nav-links {
             display: flex;
             justify-content: flex-end;
             list-style: none;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .nav-links li a {
-            color: #2d3748;
+            color: var(--text-dark);
             text-decoration: none;
+            font-family: 'Poppins', sans-serif;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
         }
 
         .nav-links li a:hover {
-            color: #2563eb;
+            color: var(--primary-color);
         }
 
-        /* همگرایی بخش‌ها (Scrollspy) */
-        .section {
-            min-height: 100vh;
-            padding: 5rem 0;
+        .nav-links li a:hover::after {
+            width: 100%;
         }
 
         /* بخش هوم */
         #home {
-            background: linear-gradient(180deg, #fff 50%, rgba(37, 99, 235, 0.05) 100%);
+            background: linear-gradient(180deg, var(--secondary-color) 0%, white 100%);
+            min-height: 100vh;
+            padding: 12rem 5% 4rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 5rem 5%;
+            gap: 4rem;
             overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.05);
+            pointer-events: none;
         }
 
         .home-content {
             flex: 1;
+            max-width: 600px;
         }
 
-        .home-text h1 {
-            font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 1rem;
+        .home-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
         }
 
-        .home-text p {
-            font-size: 1.1rem;
-            color: #4a5568;
+        .home-title:hover {
+            transform: translateY(-2px);
+        }
+
+        .home-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
             margin-bottom: 2rem;
+            min-width: 300px;
         }
 
         .cta-btn {
-            padding: 1rem 2rem;
-            background: #2563eb;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            transition: background 0.3s;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .cta-btn:hover {
-            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.2);
         }
 
         .home-img {
             flex: 1;
             max-width: 600px;
-            margin-left: 2rem;
-            animation: slideIn 1s ease-in;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            animation: fadeInUp 1s ease-out;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* بخش فرم درخواست */
         #request-form {
-            background: white;
-            padding: 5rem 5%;
+            padding: 8rem 5%;
+            background: var(--secondary-color);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .form-container {
-            max-width: 600px;
+            background: white;
+            max-width: 800px;
             width: 100%;
+            padding: 3rem 4rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
         .form-title {
-            color: #2d3748;
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
             text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #4a5568;
+            color: var(--text-light);
             font-weight: 500;
+            font-size: 1rem;
         }
 
         input, textarea, select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
         }
 
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.1);
         }
 
         textarea {
             min-height: 150px;
+            resize: vertical;
+        }
+
+        .upload-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
         .upload-btn {
-            background: #2563eb;
+            padding: 1rem;
+            background: var(--primary-color);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
             cursor: pointer;
-            margin-top: 0.5rem;
-            transition: background 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .upload-btn:hover {
-            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.1);
         }
 
-        .form-group.required label::after {
-            content: "*";
-            color: #e53e3e;
-            margin-left: 3px;
+        #fileUpload {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-checkbox input {
+            width: auto;
+            height: auto;
+            margin: 0;
+        }
+
+        .form-checkbox label {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: normal;
         }
 
         button.submit-btn {
-            background: #2563eb;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem;
+            background: var(--primary-color);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             width: 100%;
-            margin-top: 2rem;
-            transition: background 0.3s;
+            margin-top: auto;
         }
 
         button.submit-btn:hover {
-            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.1);
         }
 
-        /* بخش درباره ما */
-        #about {
-            padding: 5rem 5%;
-            background: #fff;
-        }
-
-        .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* بخش تماس */
-        #contact {
-            background: #2563eb;
-            color: white;
-            padding: 5rem 5%;
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-info {
-            margin: 2rem 0;
-        }
-
-        .contact-info i {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-
-        .contact-map {
-            margin-top: 2rem;
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* فوتر */
-        .footer {
-            background: #1a202c;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        /* ریسپانسیو */
         @media (max-width: 768px) {
-            .nav-links { gap: 1rem; justify-content: center; }
-            #home .home-content, #home .home-img { flex: 1; }
-            #home .home-img { margin-left: 0; margin-top: 2rem; }
-            .form-container { width: 100%; }
-            #about .about-container, #contact .contact-container { padding: 0 2rem; }
+            .nav-links { gap: 2rem; }
+            .home-content, .home-img { max-width: 100%; }
+            .home-title { font-size: 2.5rem; }
+            .form-container { padding: 2rem; }
         }
     </style>
 </head>
 <body>
     <!-- ناوبری -->
     <nav class="navbar">
-        <div class="nav-links">
-            <a href="#home">خانه</a>
-            <a href="#request-form">درخواست طراحی</a>
-            <a href="#about">درباره ما</a>
-            <a href="#contact">تماس</a>
-        </div>
+        <ul class="nav-links">
+            <li><a href="#home">خانه</a></li>
+            <li><a href="#request-form">درخواست</a></li>
+            <li><a href="#about">درباره</a></li>
+            <li><a href="#contact">تماس</a></li>
+        </ul>
     </nav>
 
     <!-- بخش هوم -->
     <section class="section" id="home">
         <div class="home-content">
-            <div class="home-text">
-                <h1>مسولیت طراحی سایت‌های مدرن به ما بگذارید</h1>
-                <p>با تیمی از طراحان و توسعه‌دهندگان مجرب، دارای سابقه در طراحی ویب سایت‌ها، برنامه‌های موبایل و سرویس‌های برند، برای شما پیشنهادهای انعطاف‌پذیر و مبتنی بر نیازهای واقعی ارائه می‌دهیم.</p>
-                <a href="#request-form" class="cta-btn">ارسال درخواست</a>
-            </div>
+            <h1 class="home-title">طراحی سایت‌های<br>مجرد و مفید</h1>
+            <p class="home-subtitle">با تکنولوژی‌های جدی و تیمی از صنعتی‌های مجرب، سایت‌هایی را برای شما طراحی می‌کنیم که نه تنها زیبا بلکه همچنین به نیازهای واقعی شرکت یا پروژه شما تأکید دارند.</p>
+            <a href="#request-form" class="cta-btn">شروع درخواست</a>
         </div>
         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" 
-             alt="طراحی سایت" class="home-img">
+             alt="طراحی سایت مدرن" class="home-img">
     </section>
 
     <!-- بخش فرم درخواست -->
     <section class="section" id="request-form">
         <div class="form-container">
-            <div class="form-title">فرم درخواست طراحی</div>
+            <h2 class="form-title">اطلاعات درخواست خود را وارد کنید</h2>
             <form id="designForm">
                 <!-- نام -->
                 <div class="form-group required">
                     <label for="name">نام کامل *</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required placeholder="مثال: جان دو">
                 </div>
 
                 <!-- ایمیل -->
                 <div class="form-group required">
                     <label for="email">آدرس ایمیل *</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required placeholder="مثال: john@example.com">
                 </div>
 
-                <!-- شرکت -->
+                <!-- شرکت/گروه -->
                 <div class="form-group">
                     <label for="company">نام شرکت/گروه (اختیاری)</label>
-                    <input type="text" id="company" name="company">
+                    <input type="text" id="company" name="company" placeholder="مثال: شرکت XYZ">
                 </div>
 
                 <!-- نوع پروژه -->
@@ -320,30 +369,33 @@
                         <option value="">انتخاب کنید</option>
                         <option value="website">ویب سایت</option>
                         <option value="mobile">اپلیکیشن موبایل</option>
-                        <option value="branding">برندینگ</option>
-                        <option value="other">دیگر</option>
+                        <option value="branding">پوستر/برندینگ</option>
+                        <option value="other">دیگر (توضیح دهید)</option>
                     </select>
                 </div>
 
                 <!-- توضیحات -->
                 <div class="form-group required">
-                    <label for="description">توضیحات پروژه *</label>
-                    <textarea id="description" name="description" required></textarea>
+                    <label for="description">توضیحات دقیق پروژه *</label>
+                    <textarea id="description" name="description" required placeholder="برای مثال: من میخواهم یک سایت فروشگاهی با قابلیت پرداخت آنلاین طراحی شود..."></textarea>
                 </div>
 
                 <!-- آپلود عکس -->
                 <div class="form-group">
                     <label for="fileUpload">عکس/پیوست (اختیاری)</label>
-                    <input type="file" id="fileUpload" name="fileUpload" accept="image/*">
-                    <button type="button" class="upload-btn">آپلود فایل</button>
+                    <div class="upload-section">
+                        <input type="file" id="fileUpload" name="fileUpload" accept="image/*" style="display:none;">
+                        <button class="upload-btn" type="button">
+                            <i class="fas fa-upload"></i>
+                            اپلود فایل
+                        </button>
+                    </div>
                 </div>
 
-                <!-- تأیید قوانین -->
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" required>
-                        من قوانین و شرایط استفاده را مطالعه و پذیرش می‌کنم.
-                    </label>
+                <!-- تأیید شرایط -->
+                <div class="form-checkbox required">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">من شرایط و قوانین استفاده را مطالعه و پذیرش می‌کنم.</label>
                 </div>
 
                 <!-- دکمه ارسال -->
@@ -352,59 +404,61 @@
         </div>
     </section>
 
-    <!-- بخش درباره ما -->
+    <!-- بخش درباره ما (اختیاری) -->
     <section class="section" id="about">
-        <div class="about-container">
-            <h2>درباره ما</h2>
+        <div class="about-container" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 5%;">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: var(--text-dark);">درباره ما</h2>
+            <p style="color: var(--text-light); font-size: 1.1rem; margin: 2rem 0;">
+                تیم MBZUAI IFM طراحی سایت‌ها را با تمرکز بر کاربری و جذابیت بصری طراحی می‌کنیم. با تکنولوژی‌های جدید و استانداردهای وب (SEO, Accessibility) معتبر، هدف ما ایجاد سایت‌هایی است که هم به نیازهای تجاری شما بخورند و هم کاربران را خوشحال کنند.
+            </p>
             <img src="https://images.unsplash.com/photo-1556916008-71d5a81a711c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                 alt="تیم طراحان" class="about-img">
-            <p>ما یک تیم متخصص در طراحی و توسعه سایت‌های اینترنتی هستیم. با تکنولوژی‌های جدید و تمرکز بر کاربری و سرعت، هدف ما ارائه سایت‌هایی است که نه تنها زیبا و انعطاف‌پذیر هستند، بلکه همچنین به نیازهای تجاری و سیوئی شما بخورند.</p>
-            <p>با ۵ سال سابقه کار در صنعت تکنولوژی، ما بیش از ۱۰۰ پروژه موفقیت‌آمیز طراحی و اجرا کرده‌ایم.</p>
+                 alt="تیم طراحان" style="max-width: 600px; margin: 0 auto; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
         </div>
     </section>
 
-    <!-- بخش تماس -->
+    <!-- بخش تماس (اختیاری) -->
     <section class="section" id="contact">
-        <div class="contact-container">
-            <h2>تماس با ما</h2>
-            <div class="contact-info">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>مجمع امارات مرکزی، ابوظبی، امارات متحده عربی</span>
+        <div class="contact-container" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 5%; background: white; padding: 3rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: var(--text-dark);">تماس با ما</h2>
+            <div class="contact-info" style="margin: 2rem 0;">
+                <i class="fas fa-map-marker-alt" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                <span style="color: var(--text-light); font-weight: 500;">مجمع امارات مرکزی، ابوظبی، امارات متحده عربی</span>
             </div>
             <div class="contact-info">
-                <i class="fas fa-phone"></i>
-                <span>+971 50 123 4567</span>
+                <i class="fas fa-phone" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                <span style="color: var(--text-light); font-weight: 500;">+971 50 123 4567</span>
             </div>
             <div class="contact-info">
-                <i class="fas fa-envelope"></i>
-                <span>contact@ifm-mbzuai.com</span>
+                <i class="fas fa-envelope" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                <span style="color: var(--text-light); font-weight: 500;">contact@ifm-mbzuai.com</span>
             </div>
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Abu+Dhabi&zoom=10&size=600x300&maptype=roadmap&key=YOUR_GOOGLE_MAPS_KEY" 
-                 alt="نقشه محل" class="contact-map">
-            <p>میتوانید از طریق فرم زیر یا مکان‌ها با ما در تماس باشید. پاسخگویی در ده دقیقه بعد از دریافت درخواست!</p>
+            <p style="color: var(--text-light); margin-top: 2rem;">
+                زمان پاسخگویی: ۸ صبح تا ۶ عصر (به وقت امارات) | تمامی درخواست‌ها در ۲۴ ساعت پیوسته مورد بررسی قرار می‌گیرند.
+            </p>
         </div>
     </section>
 
     <!-- فوتر -->
-    <footer class="footer">
-        <p>© 2023 MBZUAI IFM Design Studio. تمامی حقوق محفوظ است.</p>
-        <div>طراحی شده توسط: <a href="https://mbzuai.ie.edu/" style="color: white;">MBZUAI Institute of Foundation Models</a></div>
+    <footer class="footer" style="background: #1a202c; color: white; text-align: center; padding: 2rem 5%; margin-top: 4rem;">
+        <p>&copy; 2024 MBZUAI IFM Design Studio. تمامی حقوق محفوظ است.</p>
+        <div style="margin-top: 1rem; font-size: 0.9rem; color: #e2e8f0;">
+            طراحی و توسعه توسط: <a href="https://mbzuai.ie.edu/" style="color: white; text-decoration: none;">IFM Research Team</a>
+        </div>
     </footer>
 
     <script>
-        // اعتبارسنجی فرم (مثالی)
-        document.getElementById('designForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = this;
-            const formData = new FormData(form);
-            // در اینجا میتوانید داده‌ها را به سرور ارسال کنید (مثال: fetch())
-            alert('درخواست شما با موفقیت ارسال شد!');
-            form.reset();
-        });
-
-        // دکمه آپلود (فعالیت کلیک)
+        // دکمه آپلود فایل
         document.querySelector('.upload-btn').addEventListener('click', function() {
             document.getElementById('fileUpload').click();
+        });
+
+        // فرم ارسال
+        document.getElementById('designForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            // در اینجا API خود را اضافه کنید (مثال: fetch('https://api.example.com/submit', { method: 'POST', body: formData }))
+            alert('درخواست شما با موفقیت ثبت شد! در مورد پیگیری با شما تماس می‌گیریم.');
+            this.reset();
         });
     </script>
 </body>
