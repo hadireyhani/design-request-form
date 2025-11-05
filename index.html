@@ -4,60 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>هادی ریحانی – طراح وب و گرافیک</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
   <style>
-    :root { --bg:#fff; --text:#222; --accent:#00c4b4; --card:#f8f9fa; --border:#e0e0e0; }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Vazirmatn',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
-    a { color:var(--accent); text-decoration:none; }
-    .container { max-width:1100px; margin:auto; padding:0 1rem; }
-    section { padding:5rem 0; }
-
-    /* Hero */
-    .hero { min-height:100vh; display:flex; align-items:center; text-align:center; background:linear-gradient(135deg,#00c4b4 0%,#008b7e 100%); color:#fff; clip-path:polygon(0 0,100% 0,100% 90%,0 100%); }
-    .hero h1 { font-size:3.5rem; margin-bottom:.5rem; }
-    .hero p { font-size:1.3rem; margin:1rem 0; opacity:0.9; }
-    .hero img { width:180px; height:180px; border-radius:50%; border:6px solid rgba(255,255,255,.3); margin:1.5rem 0; box-shadow:0 15px 30px rgba(0,0,0,.2); }
-    .btn { display:inline-block; margin-top:1.5rem; padding:1rem 2.5rem; background:#fff; color:var(--accent); border-radius:50px; font-weight:600; transition:.3s; }
-    .btn:hover { transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,.2); }
-
-    /* Sections */
-    .section-title { text-align:center; font-size:2.2rem; margin-bottom:3rem; position:relative; }
-    .section-title::after { content:""; width:60px; height:4px; background:var(--accent); position:absolute; bottom:-15px; left:50%; transform:translateX(-50%); border-radius:2px; }
-
-    /* Grid */
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
-    .card { background:var(--card); padding:2rem; border-radius:16px; text-align:center; border:1px solid var(--border); transition:.4s; }
-    .card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,196,180,.15); border-color:var(--accent); }
-    .card i { font-size:2.5rem; color:var(--accent); margin-bottom:1rem; }
-
-    /* Portfolio */
-    .portfolio img { width:100%; height:220px; object-fit:cover; border-radius:12px; transition:.4s; }
-    .portfolio .card:hover img { transform:scale(1.05); }
-
-    /* Form */
-    form { max-width:600px; margin:auto; background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid var(--border); }
-    input, textarea, select { width:100%; padding:1rem; margin:1rem 0; border-radius:12px; border:1px solid var(--border); font-family:inherit; }
-    input:focus, textarea:focus { outline:none; border-color:var(--accent); }
-    button { background:var(--accent); color:#fff; border:none; padding:1rem 2rem; border-radius:50px; cursor:pointer; font-weight:600; width:100%; transition:.3s; }
-    button:hover { background:#008b7e; }
-
-    /* Footer */
-    footer { text-align:center; padding:3rem 0; color:#666; font-size:0.9rem; }
-
-    @media (max-width:768px) { .hero h1 { font-size:2.5rem; } .hero img { width:140px; height:140px; } }
+    :root{--bg:#fff;--text:#222;--accent:#00c4b4;--card:#f8f9fa;--border:#e0e0e0}
+    [data-theme="dark"]{--bg:#0f172a;--text:#e2e8f0;--accent:#22d3ee;--card:#1e293b;--border:#334155}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:.3s}
+    .container{max-width:1100px;margin:auto;padding:0 1rem}
+    section{padding:4rem 0}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,var(--accent),#008b7e);color:#fff;position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.1),transparent);pointer-events:none}
+    .hero img{width:160px;height:160px;border-radius:50%;border:5px solid rgba(255,255,255,.3);box-shadow:0 10px 25px rgba(0,0,0,.3);margin:1rem 0}
+    .hero h1{font-size:2.8rem;margin:.5rem 0;font-weight:600}
+    .hero p{font-size:1.2rem;opacity:.9}
+    .btn{display:inline-block;margin:1.5rem 0;padding:.9rem 2.2rem;background:#fff;color:var(--accent);border-radius:50px;font-weight:600;transition:.3s;cursor:pointer}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .section-title{text-align:center;font-size:2rem;margin-bottom:2.5rem;position:relative}
+    .section-title::after{content:"";width:60px;height:3px;background:var(--accent);position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);border-radius:2px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+    .card{background:var(--card);padding:1.8rem;border-radius:14px;text-align:center;border:1px solid var(--border);transition:.4s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 12px 25px rgba(0,196,180,.15);border-color:var(--accent)}
+    .card i{font-size:2.2rem;color:var(--accent);margin-bottom:.8rem}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:.8rem}
+    form{max-width:600px;margin:auto;background:var(--card);padding:2rem;border-radius:14px;border:1px solid var(--border)}
+    input,textarea{width:100%;padding:.9rem;margin:.8rem 0;border-radius:10px;border:1px solid var(--border);font-family:inherit;transition:.3s}
+    input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,196,180,.15)}
+    button{background:var(--accent);color:#fff;border:none;padding:.9rem;border-radius:50px;font-weight:600;cursor:pointer;width:100%;transition:.3s}
+    button:hover{background:#008b7e}
+    footer{text-align:center;padding:2.5rem 0;color:#64748b;font-size:.9rem}
+    .theme-toggle{position:fixed;top:1rem;left:1rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.5rem .8rem;cursor:pointer;z-index:1000;transition:.3s}
+    .theme-toggle:hover{transform:scale(1.1)}
+    @media(max-width:768px){.hero h1{font-size:2.2rem}.hero img{width:130px;height:130px}}
   </style>
 </head>
-<body>
+<body data-theme="light">
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+  </div>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container">
+    <div class=" h-container">
       <img src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
       <h1>هادی ریحانی</h1>
       <p>طراح وب و گرافیک | خلق تجربه‌های دیجیتال زیبا</p>
-      <a href="#contact" class="btn">شروع همکاری</a>
+      <div class="btn" onclick="location.href='#contact'">شروع همکاری</div>
     </div>
   </section>
 
@@ -66,7 +61,7 @@
     <div class="container">
       <h2 class="section-title">درباره من</h2>
       <p style="text-align:center;max-width:700px;margin:auto;">
-        من هادی ریحانی هستم، طراح وب و گرافیک با ۸ سال تجربه. تخصص من در طراحی مینیمال، کاربرمحور و مدرن است. از لوگو تا وب‌سایت کامل، همه چیز رو با استانداردهای جهانی می‌سازم.
+        طراح وب و گرافیک با ۸ سال تجربه. تخصص در طراحی مینیمال، کاربرمحور و مدرن. از لوگو تا وب‌سایت کامل، با استانداردهای جهانی.
       </p>
     </div>
   </section>
@@ -89,9 +84,18 @@
     <div class="container">
       <h2 class="section-title">نمونه کارها</h2>
       <div class="grid">
-        <div class="card"><img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=600" alt=""><p style="margin-top:1rem;">وب‌سایت شرکتی</p></div>
-        <div class="card"><img src="https://images.unsplash.com/photo-1551650975-87defd606db6?w=600" alt=""><p style="margin-top:1rem;">لوگو و برندینگ</p></div>
-        <div class="card"><img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600" alt=""><p style="margin-top:1rem;">فروشگاه آنلاین</p></div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=600" alt="وب‌سایت شرکتی">
+          <p>وب‌سایت شرکتی – React + Tailwind</p>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1551650975-87defd606db6?w=600" alt="لوگو">
+          <p>لوگو و برندینگ – Illustrator</p>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600" alt="فروشگاه">
+          <p>فروشگاه آنلاین – WooCommerce</p>
+        </div>
       </div>
     </div>
   </section>
@@ -100,10 +104,10 @@
   <section id="request">
     <div class="container">
       <h2 class="section-title">درخواست طراحی</h2>
-      <form>
+      <form onsubmit="handleSubmit(event)">
         <input type="text" placeholder="نام کامل" required>
         <input type="email" placeholder="ایمیل" required>
-        <textarea placeholder="توضیحات پروژه" rows="4" required></textarea>
+        <textarea placeholder="توضیحات پروژه" rows="3" required></textarea>
         <input type="text" placeholder="بودجه (اختیاری)">
         <button type="submit">ارسال درخواست</button>
       </form>
@@ -115,11 +119,11 @@
     <div class="container">
       <h2 class="section-title">تماس با من</h2>
       <div style="text-align:center;">
-        <a href="#" style="font-size:1.5rem;margin:0 1rem;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="font-size:1.5rem;margin:0 1rem;"><i class="fab fa-telegram"></i></a>
-        <a href="#" style="font-size:1.5rem;margin:0 1rem;"><i class="fab fa-linkedin"></i></a>
+        <a href="#" style="font-size:1.8rem;margin:0 1rem;color:var(--accent);"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="font-size:1.8rem;margin:0 1rem;color:var(--accent);"><i class="fab fa-telegram"></i></a>
+        <a href="#" style="font-size:1.8rem;margin:0 1rem;color:var(--accent);"><i class="fab fa-linkedin"></i></a>
       </div>
-      <p style="text-align:center;margin-top:2rem;">h.reyhani@ymail.com | 09159779499</p>
+      <p style="text-align:center;margin-top:1.5rem;">h.reyhani@ymail.com | 09159779499</p>
     </div>
   </section>
 
@@ -128,13 +132,28 @@
   </footer>
 
   <script>
-    // انیمیشن ساده برای دکمه‌ها
-    document.querySelectorAll('.btn, button').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.target.style.transform = 'scale(0.95)';
-        setTimeout(() => e.target.style.transform = '', 150);
-      });
-    });
+    // Dark Mode
+    function toggleTheme() {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    // Load saved theme
+    const saved = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-theme', saved);
+
+    // Form Submit (Secure & Fast)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      // Sanitize inputs
+      const clean = {};
+      for (let [k, v] of data) clean[k] = DOMPurify.sanitize(v.trim());
+      // In real use: send via fetch + CSP
+      alert('درخواست ارسال شد! (Demo)');
+      form.reset();
+    }
   </script>
 </body>
 </html>
