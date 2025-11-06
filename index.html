@@ -3,68 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هادی ریحانی – طراح گرافیک و وب</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>هادی ریحانی – طراح UI/UX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root{
-      --bg:#fff;--text:#222;--accent:#00c4b4;--accent-dark:#008b7e;--card:#f8f9fa;--border:#e0e0e0;
+      --bg:#ffffff;--text:#1a1a1a;--accent:#00c4b4;--accent-dark:#008b7e;--card:#f8f9fa;--border:#e0e0e0;
+      --glass:rgba(255,255,255,.1);--glass-b:rgba(255,255,255,.2);
     }
     [data-theme="dark"]{
-      --bg:#0a0a0a;--text:#f1f1f1;--accent:#22d3ee;--accent-dark:#008b7e;--card:#1a1a1a;--border:#333;
+      --bg:#0f172a;--text:#e2e8f0;--accent:#22d3ee;--accent-dark:#008b7e;--card:#1e293b;--border:#334155;
+      --glass:rgba(30,41,59,.5);--glass-b:rgba(255,255,255,.1);
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:.3s;overflow-x:hidden}
-    .container{max-width:1200px;margin:auto;padding:0 1rem}
-    section{padding:5rem 0}
+    body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:all .4s;overflow-x:hidden}
+    .container{max-width:1240px;margin:auto;padding:0 1.5rem}
+    section{padding:6rem 0}
 
     /* Navbar */
-    nav{position:fixed;top:0;width:100%;background:var(--card);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
+    nav{position:fixed;top:0;width:100%;background:var(--card);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000}
     .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
     .logo{font-weight:700;font-size:1.6rem;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
     .nav-links{display:flex;gap:2rem}
-    .nav-links a{color:var(--text);font-weight:500;transition:.3s}
-    .nav-links a:hover{color:var(--accent)}
+    .nav-links a{color:var(--text);font-weight:500;transition:.3s;position:relative}
+    .nav-links a::after{content:"";position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--accent);transition:.3s}
+    .nav-links a:hover::after{width:100%}
 
     /* Hero */
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=1600') center/cover no-repeat;color:#fff;position:relative}
-    .hero h1{font-size:4rem;margin:1rem 0;font-weight:600}
-    .hero p{font-size:1.4rem;max-width:700px;margin:auto}
-    .btn{display:inline-block;margin:2rem .5rem;padding:1rem 2.5rem;background:var(--accent);color:#fff;border-radius:50px;font-weight:600;transition:.3s}
-    .btn:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,196,180,.3)}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.15),transparent 50%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .hero-text h1{font-size:3.8rem;margin-bottom:.6rem;font-weight:700}
+    .hero-text p{font-size:1.2rem;max-width:500px;margin-bottom:2rem}
+    .btn{padding:1rem 2.4rem;border-radius:50px;font-weight:600;transition:.4s;display:inline-flex;align-items:center;gap:.6rem}
+    .btn.primary{background:#fff;color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.15)}
+    .btn.secondary{border:2px solid #fff;color:#fff}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,196,180,.3)}
+    .hero-img img{width:100%;max-width:420px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
 
-    /* Gallery */
-    .gallery{columns:3 300px;column-gap:1.5rem;padding:2rem 0}
-    .gallery-item{margin-bottom:1.5rem;break-inside:avoid;position:relative;overflow:hidden;border-radius:12px;cursor:pointer}
-    .gallery-item img{width:100%;height:auto;display:block;transition:.5s}
-    .gallery-item:hover img{transform:scale(1.08)}
-    .gallery-item::after{content:attr(data-title);position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);color:#fff;padding:1rem;font-size:.9rem;opacity:0;transition:.3s}
-    .gallery-item:hover::after{opacity:1}
+    /* Section Title */
+    .section-title{text-align:center;font-size:2.4rem;margin-bottom:3rem;font-weight:600;position:relative}
+    .section-title::after{content:"";width:80px;height:4px;background:var(--accent);position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);border-radius:2px}
+
+    /* Portfolio Grid */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
+    .project-card{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:.5s;cursor:pointer}
+    .project-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,196,180,.15);border-color:var(--accent)}
+    .project-img{position:relative;overflow:hidden}
+    .project-img img{width:100%;height:220px;object-fit:cover;transition:.6s}
+    .project-card:hover .project-img img{transform:scale(1.08)}
+    .project-info{padding:1.8rem}
+    .project-info h3{font-size:1.3rem;margin-bottom:.5rem;font-weight:600}
+    .project-info p{font-size:.95rem;color:#666;margin-bottom:1rem}
+    .project-tags{display:flex;gap:.5rem;flex-wrap:wrap}
+    .tag{background:var(--glass);backdrop-filter:blur(8px);padding:.3rem .8rem;border-radius:50px;font-size:.8rem;color:var(--text)}
 
     /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:.4s}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:.4s}
     .modal.show{opacity:1;pointer-events:all}
-    .modal img{max-width:90%;max-height:90vh;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
-    .modal-close{position:absolute;top:2rem;right:2rem;color:#fff;font-size:2rem;cursor:pointer}
+    .modal-content{background:var(--card);max-width:900px;width:92%;max-height:92vh;overflow:auto;border-radius:20px;padding:2.5rem;position:relative;box-shadow:0 25px 50px rgba(0,0,0,.3)}
+    .modal-close{position:absolute;top:1.2rem;left:1.2rem;font-size:1.8rem;cursor:pointer;color:var(--text);transition:.3s}
+    .modal-close:hover{transform:rotate(90deg)}
+    .case-study img{width:100%;border-radius:14px;margin:1.5rem 0}
+    .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:2rem 0}
+    .step{background:var(--glass);backdrop-filter:blur(10px);padding:1.5rem;border-radius:16px;text-align:center;border:1px solid var(--glass-b)}
+    .step i{font-size:2rem;color:var(--accent);margin-bottom:.8rem}
 
     /* About */
-    .about{text-align:center;padding:4rem 0}
-    .about img{width:180px;height:180px;border-radius:50%;border:6px solid var(--accent);margin-bottom:1.5rem}
+    .about{text-align:center;padding:5rem 0}
+    .about img{width:160px;height:160px;border-radius:50%;border:6px solid var(--accent);margin-bottom:1.5rem}
     .about p{max-width:700px;margin:auto;font-size:1.1rem}
 
     /* Contact */
-    .contact{text-align:center;padding:4rem 0;background:var(--card);border-top:1px solid var(--border)}
+    .contact{text-align:center;padding:5rem 0;background:var(--card);border-top:1px solid var(--border)}
     .social a{font-size:2rem;margin:0 1rem;color:var(--accent);transition:.3s}
     .social a:hover{transform:scale(1.2)}
 
     /* Theme Toggle */
-    .theme-toggle{position:fixed;bottom:1.5rem;left:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.6rem 1rem;cursor:pointer;z-index:1000;transition:.3s}
+    .theme-toggle{position:fixed;bottom:1.5rem;left:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.6rem 1rem;cursor:pointer;z-index:1000;transition:.3s;display:flex;align-items:center;gap:.5rem}
     .theme-toggle:hover{transform:scale(1.1)}
 
-    @media(max-width:768px){
-      .hero h1{font-size:2.8rem}
-      .gallery{columns:2 200px}
-      .nav-links{gap:1rem;font-size:.95rem}
+    /* Responsive */
+    @media(max-width:992px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-text h1{font-size:2.8rem;text-align:center}
+      .hero-img{text-align:center}
+    }
+    @media(max-width:600px){
+      .hero-text h1{font-size:2.2rem}
+      .process-steps{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -90,34 +117,61 @@
 
   <!-- Hero -->
   <section id="home" class="hero">
-    <div class="container">
-      <h1>طراح گرافیک و وب</h1>
-      <p>خلق هویت بصری، طراحی سایت‌های زیبا و کاربرمحور با استانداردهای جهانی</p>
-      <a href="#portfolio" class="btn">مشاهده نمونه کارها</a>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>طراح UI/UX</h1>
+        <p>خلق تجربه‌های کاربری روان، زیبا و هدفمند برای اپلیکیشن‌ها و وب‌سایت‌ها</p>
+        <div>
+          <a href="#portfolio" class="btn primary">مشاهده پروژه‌ها</a>
+          <a href="#contact" class="btn secondary">شروع همکاری</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1562577308-9e68e98c4e9b?w=800" alt="UI/UX Design">
+      </div>
     </div>
   </section>
 
-  <!-- Portfolio Gallery -->
+  <!-- Portfolio -->
   <section id="portfolio">
     <div class="container">
-      <div class="gallery">
-        <div class="gallery-item" data-title="وب‌سایت شرکتی – React + Tailwind" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800" alt="">
+      <h2 class="section-title">نمونه کارها</h2>
+      <div class="portfolio-grid">
+        <div class="project-card" onclick="openCaseStudy(0)">
+          <div class="project-img"><img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800" alt=""></div>
+          <div class="project-info">
+            <h3>اپلیکیشن بانکی</h3>
+            <p>طراحی کامل UI/UX با Figma و تست کاربری</p>
+            <div class="project-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Mobile</span>
+            </div>
+          </div>
         </div>
-        <div class="gallery-item" data-title="لوگو و برندینگ استارتاپ" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1551650975-87defd606db6?w=800" alt="">
+        <div class="project-card" onclick="openCaseStudy(1)">
+          <div class="project-img"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800" alt=""></div>
+          <div class="project-info">
+            <h3>وب‌سایت فروشگاهی</h3>
+            <p>بهینه‌سازی تجربه خرید و افزایش نرخ تبدیل</p>
+            <div class="project-tags">
+              <span class="tag">E-commerce</span>
+              <span class="tag">A/B Testing</span>
+              <span class="tag">Responsive</span>
+            </div>
+          </div>
         </div>
-        <div class="gallery-item" data-title="اپلیکیشن موبایل – UI/UX" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800" alt="">
-        </div>
-        <div class="gallery-item" data-title="وب‌سایت فروشگاهی – WooCommerce" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="">
-        </div>
-        <div class="gallery-item" data-title="طراحی پست اینستاگرام" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800" alt="">
-        </div>
-        <div class="gallery-item" data-title="پکیج برندینگ کامل" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1572044169983-4e9e6638e2d9?w=800" alt="">
+        <div class="project-card" onclick="openCaseStudy(2)">
+          <div class="project-img"><img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800" alt=""></div>
+          <div class="project-info">
+            <h3>داشبورد مدیریتی</h3>
+            <p>طراحی داشبورد پیچیده با داده‌های واقعی</p>
+            <div class="project-tags">
+              <span class="tag">Dashboard</span>
+              <span class="tag">Data Viz</span>
+              <span class="tag">Dark Mode</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,7 +182,7 @@
     <div class="container">
       <img src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
       <h2>هادی ریحانی</h2>
-      <p>طراح گرافیک و وب با ۸ سال تجربه. تخصص در طراحی لوگو، برندینگ، UI/UX و وب‌سایت‌های حرفه‌ای. همیشه به دنبال راه‌حل‌های خلاقانه و کاربرمحور.</p>
+      <p>طراح UI/UX با بیش از ۸ سال تجربه. تخصص در تحقیق کاربر، وایرفریم، پروتوتایپ و تست کاربری. همیشه به دنبال راه‌حل‌های هوشمند و کاربرمحور هستم.</p>
     </div>
   </section>
 
@@ -137,25 +191,94 @@
     <div class="container">
       <h2>شروع همکاری</h2>
       <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-telegram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
         <a href="#"><i class="fab fa-behance"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
       </div>
       <p style="margin-top:1.5rem">h.reyhani@ymail.com | 09159779499</p>
     </div>
   </section>
 
-  <!-- Modal -->
-  <div class="modal" id="modal" onclick="this.classList.remove('show')">
-    <span class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">×</span>
-    <img id="modalImg" src="" alt="">
+  <!-- Modal Case Study -->
+  <div class="modal" id="caseModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="document.getElementById('caseModal').classList.remove('show')">×</span>
+      <div id="caseContent">
+        <!-- Content loaded by JS -->
+      </div>
+    </div>
   </div>
 
   <script>
-    function openModal(el) {
-      document.getElementById('modalImg').src = el.querySelector('img').src;
-      document.getElementById('modal').classList.add('show');
+    const cases = [
+      {
+        title: "اپلیکیشن بانکی",
+        desc: "طراحی کامل یک اپلیکیشن بانکی با تمرکز بر امنیت و تجربه کاربری روان. شامل تحقیق کاربر، وایرفریم، پروتوتایپ و تست.",
+        images: [
+          "https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800",
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800"
+        ],
+        process: [
+          {icon:"fas fa-search", title:"تحقیق کاربر", desc:"مصاحبه با ۳۰ کاربر"},
+          {icon:"fas fa-drafting-compass", title:"وایرفریم", desc:"ساختار اولیه"},
+          {icon:"fas fa-paint-brush", title:"طراحی UI", desc:"ماکاپ با Figma"},
+          {icon:"fas fa-users", title:"تست کاربری", desc:"بهبود بر اساس فیدبک"}
+        ],
+        result: "افزایش ۴۲٪ نرخ تکمیل تراکنش"
+      },
+      {
+        title: "وب‌سایت فروشگاهی",
+        desc: "بهینه‌سازی تجربه خرید یک فروشگاه آنلاین. تمرکز بر سرعت، فیلترها و فرآیند پرداخت.",
+        images: [
+          "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
+          "https://images.unsplash.com/photo-1556742111-a381df1865a2?w=800"
+        ],
+        process: [
+          {icon:"fas fa-chart-line", title:"تحلیل رقبا", desc:"بررسی ۱۰ فروشگاه"},
+          {icon:"fas fa-sitemap", title:"معماری اطلاعات", desc:"بهبود ناوبری"},
+          {icon:"fas fa-mobile-alt", title:"ریسپانسیو", desc:"طراحی موبایل"},
+          {icon:"fas fa-stopwatch", title:"تست سرعت", desc:"بهینه‌سازی لود"}
+        ],
+        result: "کاهش ۶۵٪ نرخ ترک سبد خرید"
+      },
+      {
+        title: "داشبورد مدیریتی",
+        desc: "طراحی داشبورد پیچیده برای مدیران با داده‌های زنده و قابلیت سفارشی‌سازی.",
+        images: [
+          "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800",
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
+        ],
+        process: [
+          {icon:"fas fa-database", title:"داده‌ها", desc:"اتصال به API"},
+          {icon:"fas fa-chart-bar", title:"ویژوال‌سازی", desc:"نمودارهای تعاملی"},
+          {icon:"fas fa-palette", title:"تم دارک", desc:"حالت شب"},
+          {icon:"fas fa-cog", title:"سفارشی‌سازی", desc:"ویجت‌های قابل جابجایی"}
+        ],
+        result: "کاهش ۷۰٪ زمان تحلیل داده"
+      }
+    ];
+
+    function openCaseStudy(i) {
+      const c = cases[i];
+      const content = `
+        <h2>${c.title}</h2>
+        <p style="margin:1.5rem 0;font-size:1.1rem;">${c.desc}</p>
+        ${c.images.map(src => `<img src="${src}" alt="">`).join('')}
+        <h3 style="margin:2rem 0 1.5rem;">فرآیند طراحی</h3>
+        <div class="process-steps">
+          ${c.process.map(step => `
+            <div class="step">
+              <i class="${step.icon}"></i>
+              <h4>${step.title}</h4>
+              <p>${step.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+        <p style="margin-top:2rem;font-weight:600;color:var(--accent);font-size:1.2rem;">نتیجه: ${c.result}</p>
+      `;
+      document.getElementById('caseContent').innerHTML = content;
+      document.getElementById('caseModal').classList.add('show');
     }
   </script>
 </body>
