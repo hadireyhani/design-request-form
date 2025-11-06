@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هادی ریحانی – عکاس حرفه‌ای</title>
+  <title>هادی ریحانی – طراح گرافیک و وب</title>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{--bg:#fff;--text:#222;--accent:#e63946;--card:#f8f9fa;--border:#e0e0e0}
-    [data-theme="dark"]{--bg:#0a0a0a;--text:#f1f1f1;--accent:#ff4d4d;--card:#1a1a1a;--border:#333}
+    :root{
+      --bg:#fff;--text:#222;--accent:#00c4b4;--accent-dark:#008b7e;--card:#f8f9fa;--border:#e0e0e0;
+    }
+    [data-theme="dark"]{
+      --bg:#0a0a0a;--text:#f1f1f1;--accent:#22d3ee;--accent-dark:#008b7e;--card:#1a1a1a;--border:#333;
+    }
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:.3s;overflow-x:hidden}
     .container{max-width:1200px;margin:auto;padding:0 1rem}
@@ -17,17 +21,17 @@
     /* Navbar */
     nav{position:fixed;top:0;width:100%;background:var(--card);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
     .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
-    .logo{font-weight:700;font-size:1.6rem;color:var(--accent)}
+    .logo{font-weight:700;font-size:1.6rem;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
     .nav-links{display:flex;gap:2rem}
     .nav-links a{color:var(--text);font-weight:500;transition:.3s}
     .nav-links a:hover{color:var(--accent)}
 
     /* Hero */
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=1600') center/cover no-repeat;color:#fff;position:relative}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=1600') center/cover no-repeat;color:#fff;position:relative}
     .hero h1{font-size:4rem;margin:1rem 0;font-weight:600}
     .hero p{font-size:1.4rem;max-width:700px;margin:auto}
     .btn{display:inline-block;margin:2rem .5rem;padding:1rem 2.5rem;background:var(--accent);color:#fff;border-radius:50px;font-weight:600;transition:.3s}
-    .btn:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(230,57,70,.3)}
+    .btn:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,196,180,.3)}
 
     /* Gallery */
     .gallery{columns:3 300px;column-gap:1.5rem;padding:2rem 0}
@@ -77,7 +81,7 @@
       <div class="logo">هادی ریحانی</div>
       <div class="nav-links">
         <a href="#home">خانه</a>
-        <a href="#gallery">گالری</a>
+        <a href="#portfolio">نمونه کارها</a>
         <a href="#about">درباره</a>
         <a href="#contact">تماس</a>
       </div>
@@ -87,33 +91,33 @@
   <!-- Hero -->
   <section id="home" class="hero">
     <div class="container">
-      <h1>عکاسی حرفه‌ای</h1>
-      <p>ثبت لحظات، خلق داستان، با دیدی متفاوت و لنز حرفه‌ای</p>
-      <a href="#gallery" class="btn">مشاهده گالری</a>
+      <h1>طراح گرافیک و وب</h1>
+      <p>خلق هویت بصری، طراحی سایت‌های زیبا و کاربرمحور با استانداردهای جهانی</p>
+      <a href="#portfolio" class="btn">مشاهده نمونه کارها</a>
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section id="gallery">
+  <!-- Portfolio Gallery -->
+  <section id="portfolio">
     <div class="container">
       <div class="gallery">
-        <div class="gallery-item" data-title="پرتره در طبیعت" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800" alt="">
+        <div class="gallery-item" data-title="وب‌سایت شرکتی – React + Tailwind" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800" alt="">
         </div>
-        <div class="gallery-item" data-title="خیابان‌های شب" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e7bee7?w=800" alt="">
+        <div class="gallery-item" data-title="لوگو و برندینگ استارتاپ" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1551650975-87defd606db6?w=800" alt="">
         </div>
-        <div class="gallery-item" data-title="پرتره سیاه و سفید" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800" alt="">
+        <div class="gallery-item" data-title="اپلیکیشن موبایل – UI/UX" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800" alt="">
         </div>
-        <div class="gallery-item" data-title="طبیعت پاییزی" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1506197061617-7e2b6c7f5731?w=800" alt="">
+        <div class="gallery-item" data-title="وب‌سایت فروشگاهی – WooCommerce" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="">
         </div>
-        <div class="gallery-item" data-title="عکاسی خیابانی" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1517248135467-2c7ed3ba949d?w=800" alt="">
+        <div class="gallery-item" data-title="طراحی پست اینستاگرام" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800" alt="">
         </div>
-        <div class="gallery-item" data-title="پرتره استودیویی" onclick="openModal(this)">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="">
+        <div class="gallery-item" data-title="پکیج برندینگ کامل" onclick="openModal(this)">
+          <img src="https://images.unsplash.com/photo-1572044169983-4e9e6638e2d9?w=800" alt="">
         </div>
       </div>
     </div>
@@ -124,18 +128,19 @@
     <div class="container">
       <img src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
       <h2>هادی ریحانی</h2>
-      <p>عکاس حرفه‌ای با بیش از ۸ سال تجربه در عکاسی پرتره، خیابانی و طبیعت. هدف من ثبت لحظاتی است که داستان دارند.</p>
+      <p>طراح گرافیک و وب با ۸ سال تجربه. تخصص در طراحی لوگو، برندینگ، UI/UX و وب‌سایت‌های حرفه‌ای. همیشه به دنبال راه‌حل‌های خلاقانه و کاربرمحور.</p>
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="contact">
     <div class="container">
-      <h2>تماس با من</h2>
+      <h2>شروع همکاری</h2>
       <div class="social">
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-telegram"></i></a>
         <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-behance"></i></a>
       </div>
       <p style="margin-top:1.5rem">h.reyhani@ymail.com | 09159779499</p>
     </div>
