@@ -3,300 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هادی ریحانی – طراح وب و گرافیک | پورتفولیو حرفه‌ای</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.emailjs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>هادی ریحانی – طراح وب و گرافیک</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#ffffff;--text:#1a1a1a;--accent:#00c4b4;--accent-dark:#008b7e;--card:#f8f9fa;--border:#e0e0e0;
-      --glass:rgba(255,255,255,.12);--glass-b:rgba(255,255,255,.2);--shadow:0 15px 35px rgba(0,0,0,.1);
-    }
-    [data-theme="dark"]{
-      --bg:#0a0e17;--text:#e2e8f0;--accent:#00e5d0;--accent-dark:#00a892;--card:#1a2332;--border:#334155;
-      --glass:rgba(26,35,50,.6);--glass-b:rgba(255,255,255,.1);--shadow:0 15px 35px rgba(0,0,0,.3);
-    }
+    :root{--bg:#fff;--text:#222;--accent:#00c4b4;--card:#f8f9fa;--border:#e0e0e0}
+    [data-theme="dark"]{--bg:#0f172a;--text:#e2e8f0;--accent:#22d3ee;--card:#1e293b;--border:#334155}
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:all .4s;overflow-x:hidden}
-    .container{max-width:1280px;margin:auto;padding:0 1.5rem}
-    section{padding:6rem 0;position:relative}
-
-    /* Navbar */
-    .navbar{position:fixed;top:0;width:100%;background:var(--card);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);z-index:1000;transition:.3s}
-    .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0}
-    .logo{font-weight:800;font-size:1.6rem;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .nav-links{display:flex;gap:2.2rem}
-    .nav-links a{color:var(--text);font-weight:500;transition:.3s;position:relative}
-    .nav-links a::after{content:"";position:absolute;bottom:-8px;left:0;width:0;height:2px;background:var(--accent);transition:.3s}
-    .nav-links a:hover::after{width:100%}
-    .nav-links a:hover{color:var(--accent)}
-
-    /* Theme Toggle */
-    .theme-toggle{position:fixed;top:1.2rem;left:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.6rem 1rem;cursor:pointer;z-index:1001;transition:.3s;display:flex;align-items:center;gap:.5rem;font-size:.9rem}
-    .theme-toggle:hover{transform:scale(1.08);box-shadow:var(--shadow)}
-
-    /* Admin Button */
-    .admin-btn{position:fixed;bottom:1.5rem;left:1.5rem;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:50px;font-weight:600;z-index:1000;cursor:pointer;box-shadow:var(--shadow);transition:.3s}
-    .admin-btn:hover{transform:scale(1.1)}
-
-    /* Hero */
-    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;position:relative;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.2),transparent 50%),radial-gradient(circle at 80% 20%,rgba(0,196,180,.15),transparent 50%);pointer-events:none}
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-    .hero-text h1{font-size:4.2rem;margin-bottom:.6rem;font-weight:800;letter-spacing:-1px}
-    .hero-text .tagline{font-size:1.5rem;margin-bottom:1.2rem;font-weight:400;opacity:.95}
-    .hero-text p{font-size:1.15rem;max-width:500px;margin-bottom:2rem}
-    .hero-cta{display:flex;gap:1.2rem;flex-wrap:wrap}
-    .btn{padding:1rem 2.4rem;border-radius:50px;font-weight:600;transition:all .4s;display:inline-flex;align-items:center;gap:.6rem}
-    .btn.primary{background:#fff;color:var(--accent);box-shadow:var(--shadow)}
-    .btn.secondary{border:2px solid #fff;color:#fff}
-    .btn:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.25)}
-    .hero-img img{width:100%;max-width:440px;border-radius:24px;box-shadow:var(--shadow);transition:.6s}
-    .hero-img:hover img{transform:scale(1.03) rotate(1deg)}
-
-    /* Section Title */
-    .section-title{text-align:center;font-size:2.6rem;margin-bottom:3.5rem;font-weight:700;position:relative}
-    .section-title::after{content:"";width:90px;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent-dark));position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);border-radius:3px}
-
-    /* Glass Card */
-    .glass{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow)}
-
-    /* Grid */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.2rem}
-    .card{background:var(--card);padding:2.2rem;border-radius:18px;text-align:center;border:1px solid var(--border);transition:all .5s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden}
-    .card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,196,180,.05),transparent);opacity:0;transition:.4s}
-    .card:hover::before{opacity:1}
-    .card:hover{transform:translateY(-12px);box-shadow:var(--shadow);border-color:var(--accent)}
-    .card i{font-size:3rem;color:var(--accent);margin-bottom:1.2rem}
-    .card h3{font-size:1.4rem;margin-bottom:.8rem;font-weight:600}
-
-    /* Skills */
-    .skill{margin:1.2rem 0;display:flex;flex-direction:column}
-    .skill span{font-weight:500;margin-bottom:.5rem}
-    .bar{height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden;position:relative}
-    .bar div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-dark));width:0;border-radius:5px;transition:width 1.8s cubic-bezier(.25,.46,.45,.94)}
-    .bar span{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:.75rem;color:#fff;font-weight:600}
-
-    /* Timeline */
-    .timeline{margin-top:3rem}
-    .tl-item{position:relative;padding-left:2.5rem;margin-bottom:2rem;border-left:3px solid var(--accent)}
-    .tl-item::before{content:"";position:absolute;left:-10px;top:0;width:16px;height:16px;background:var(--accent);border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 4px var(--accent)}
-    .tl-item h4{font-weight:600;margin-bottom:.4rem}
-    .tl-item small{color:var(--accent);font-weight:500}
-
-    /* Portfolio */
-    .filters{text-align:center;margin-bottom:3rem}
-    .filter-btn{padding:.7rem 1.8rem;margin:0 .5rem;border-radius:50px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:500;transition:.3s}
-    .filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 8px 20px rgba(0,196,180,.3)}
-    .project-card{cursor:pointer;overflow:hidden}
-    .project-card img{width:100%;height:220px;object-fit:cover;border-radius:14px;transition:transform .6s ease}
-    .project-card:hover img{transform:scale(1.12)}
-    .project-overlay{position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;display:flex;flex-direction:column;justify-content:end;padding:1.8rem;opacity:0;transition:.4s}
-    .project-card:hover .project-overlay{opacity:1}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:.4s}
-    .modal.show{opacity:1;pointer-events:all}
-    .modal-content{background:var(--card);max-width:900px;width:92%;max-height:92vh;overflow:auto;border-radius:20px;padding:2.5rem;position:relative;box-shadow:var(--shadow)}
-    .modal-close{position:absolute;top:1.2rem;left:1.2rem;font-size:1.8rem;cursor:pointer;color:var(--text);transition:.3s}
-    .modal-close:hover{transform:rotate(90deg)}
-
-    /* Form */
-    form{background:var(--card);padding:3rem;border-radius:20px;border:1px solid var(--border);max-width:800px;margin:auto;box-shadow:var(--shadow)}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
-    .form-group{position:relative}
-    .form-group label{position:absolute;top:-10px;right:20px;background:var(--bg);padding:0 .8rem;font-size:.85rem;color:var(--accent);font-weight:500}
-    input,textarea,select{width:100%;padding:1.2rem 1.5rem;border-radius:14px;border:1px solid var(--border);background:transparent;font-family:inherit;transition:.3s}
-    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,196,180,.15)}
-    textarea{resize:vertical;min-height:120px}
-    button{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:1.2rem;border-radius:50px;font-weight:600;cursor:pointer;width:100%;transition:all .4s;box-shadow:var(--shadow);margin-top:1rem}
-    button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,196,180,.3)}
-
-    /* Admin Panel */
-    .admin-panel{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:3000;opacity:0;pointer-events:none;transition:.4s}
+    body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:.3s}
+    .container{max-width:1100px;margin:auto;padding:0 1rem}
+    section{padding:5rem 0}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--accent),#008b7e);color:#fff;text-align:center}
+    .hero h1{font-size:3.5rem;margin:1rem 0}
+    .hero p{font-size:1.3rem;margin:1rem 0}
+    .btn{display:inline-block;margin:1rem .5rem;padding:1rem 2.5rem;background:#fff;color:var(--accent);border-radius:50px;font-weight:600;transition:.3s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .section-title{text-align:center;font-size:2.2rem;margin-bottom:3rem;position:relative}
+    .section-title::after{content:"";width:60px;height:4px;background:var(--accent);position:absolute;bottom:-15px;left:50%;transform:translateX(-50%)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem}
+    .card{background:var(--card);padding:2rem;border-radius:16px;text-align:center;border:1px solid var(--border);transition:.4s}
+    .card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,196,180,.15);border-color:var(--accent)}
+    .card i{font-size:2.5rem;color:var(--accent);margin-bottom:1rem}
+    form{max-width:600px;margin:auto;background:var(--card);padding:2.5rem;border-radius:16px;border:1px solid var(--border)}
+    input,textarea,select{width:100%;padding:1rem;margin:1rem 0;border-radius:12px;border:1px solid var(--border);font-family:inherit}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+    button{background:var(--accent);color:#fff;border:none;padding:1rem;border-radius:50px;cursor:pointer;font-weight:600;width:100%;transition:.3s}
+    button:hover{background:#008b7e}
+    .theme-toggle,.admin-btn{position:fixed;z-index:1000}
+    .theme-toggle{top:1rem;left:1rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.5rem .8rem;cursor:pointer}
+    .admin-btn{bottom:1rem;left:1rem;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:50px;font-weight:600;cursor:pointer}
+    .admin-panel{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:.3s}
     .admin-panel.show{opacity:1;pointer-events:all}
-    .admin-content{background:var(--card);width:90%;max-width:1000px;max-height:90vh;overflow:auto;border-radius:20px;padding:2.5rem;position:relative;box-shadow:var(--shadow)}
-    .admin-close{position:absolute;top:1.2rem;left:1.2rem;font-size:1.8rem;cursor:pointer;color:var(--text)}
-    .admin-section{margin-bottom:2.5rem}
-    .admin-section h3{margin-bottom:1rem;font-size:1.5rem;border-bottom:2px solid var(--accent);padding-bottom:.5rem}
-    .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-    .admin-input{width:100%;padding:1rem;border-radius:12px;border:1px solid var(--border);font-family:inherit}
-    .admin-save{background:var(--accent);color:#fff;padding:1rem 2rem;border:none;border-radius:50px;cursor:pointer;font-weight:600;margin-top:1.5rem}
-
-    /* Particles */
-    .particles{position:fixed;inset:0;pointer-events:none;z-index:-1}
-    .particle{position:absolute;width:4px;height:4px;background:var(--accent);border-radius:50%;opacity:.7;animation:float 20s infinite linear}
-    @keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
-
-    /* Reveal */
-    .reveal{opacity:0;transform:translateY(50px)}
-    .reveal.active{opacity:1;transform:none;transition:1.2s cubic-bezier(.25,.46,.45,.94)}
-
-    @media(max-width:992px){.hero-grid,.form-grid,.admin-grid{grid-template-columns:1fr}}
-    @media(max-width:600px){.hero-text h1{font-size:2.4rem}.hero-img img{max-width:260px}section{padding:4rem 0}}
+    .admin-content{background:var(--card);width:90%;max-width:600px;padding:2rem;border-radius:16px}
+    .admin-close{position:absolute;top:1rem;left:1rem;font-size:1.5rem;cursor:pointer}
+    .admin-input{width:100%;padding:1rem;margin:1rem 0;border-radius:12px;border:1px solid var(--border)}
+    @media(max-width:768px){.hero h1{font-size:2.5rem}}
   </style>
 </head>
 <body data-theme="light">
 
-  <!-- Particles -->
-  <div class="particles" id="particles"></div>
-
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" id="themeToggle">
-    <i class="fas fa-moon"></i> <span id="themeText">Dark Mode</span>
-  </button>
-
-  <!-- Admin Button -->
-  <button class="admin-btn" id="adminBtn">تنظیمات</button>
+  <!-- Theme & Admin -->
+  <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
+  <button class="admin-btn" onclick="openAdmin()">تنظیمات</button>
 
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <div class="logo" id="siteName">هادی ریحانی</div>
-      <div class="nav-links">
-        <a href="#home">خانه</a>
-        <a href="#about">درباره</a>
-        <a href="#services">خدمات</a>
-        <a href="#portfolio">نمونه کارها</a>
-        <a href="#request">درخواست</a>
-        <a href="#contact">تماس</a>
+  <nav style="position:fixed;top:0;width:100%;background:var(--card);border-bottom:1px solid var(--border);z-index:999;padding:1rem 0">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <div id="siteName" style="font-weight:700;font-size:1.5rem">هادی ریحانی</div>
+      <div style="display:flex;gap:1.5rem">
+        <a href="#home" style="color:var(--text)">خانه</a>
+        <a href="#about" style="color:var(--text)">درباره</a>
+        <a href="#services" style="color:var(--text)">خدمات</a>
+        <a href="#portfolio" style="color:var(--text)">نمونه کارها</a>
+        <a href="#request" style="color:var(--text)">درخواست</a>
+        <a href="#contact" style="color:var(--text)">تماس</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text reveal">
-        <h1 id="heroName">هادی ریحانی</h1>
-        <p class="tagline" id="heroTagline">طراح وب و گرافیک</p>
-        <p id="heroDesc">خلق تجربه‌های دیجیتال زیبا، کاربرمحور و مدرن با استانداردهای جهانی.</p>
-        <div class="hero-cta">
-          <a href="#portfolio" class="btn primary">نمونه کارها</a>
-          <a href="#request" class="btn secondary">شروع پروژه</a>
-        </div>
-      </div>
-      <div class="hero-img reveal">
-        <img id="heroImg" src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
-      </div>
+    <div class="container">
+      <img id="heroImg" src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی" style="width:180px;height:180px;border-radius:50%;border:6px solid rgba(255,255,255,.3);margin:1rem auto;display:block">
+      <h1 id="heroName">هادی ریحانی</h1>
+      <p id="heroTitle">طراح وب و گرافیک</p>
+      <p id="heroDesc">خلق تجربه‌های دیجیتال زیبا و کاربرمحور</p>
+      <a href="#portfolio" class="btn">نمونه کارها</a>
+      <a href="#request" class="btn">درخواست پروژه</a>
     </div>
   </section>
 
   <!-- About -->
   <section id="about">
     <div class="container">
-      <h2 class="section-title reveal">درباره من</h2>
-      <div class="glass reveal">
-        <p id="aboutBio" style="text-align:center;max-width:900px;margin:auto;font-size:1.1rem;">
-          من هادی ریحانی هستم، طراح وب و گرافیک با بیش از ۸ سال تجربه حرفه‌ای...
-        </p>
-      </div>
+      <h2 class="section-title">درباره من</h2>
+      <p id="aboutText" style="text-align:center;max-width:700px;margin:auto">
+        من هادی ریحانی هستم، طراح وب و گرافیک با ۸ سال تجربه. تخصص من در طراحی مینیمال و کاربرمحور است.
+      </p>
+    </div>
+  </section>
 
-      <div class="reveal" style="margin-top:4rem;">
-        <h3 style="text-align:center;margin-bottom:2rem;font-size:1.8rem;">مهارت‌های کلیدی</h3>
-        <div class="grid">
-          <div class="skill"><span id="skill1Name">UI/UX Design</span><div class="bar"><div id="skill1Bar" style="width:95%"><span>95%</span></div></div></div>
-          <div class="skill"><span id="skill2Name">Web Design</span><div class="bar"><div id="skill2Bar" style="width:90%"><span>90%</span></div></div></div>
-          <div class="skill"><span id="skill3Name">Branding</span><div class="bar"><div id="skill3Bar" style="width:88%"><span>88%</span></div></div></div>
-          <div class="skill"><span id="skill4Name">Logo Design</span><div class="bar"><div id="skill4Bar" style="width:93%"><span>93%</span></div></div></div>
-        </div>
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">خدمات</h2>
+      <div class="grid">
+        <div class="card"><i class="fas fa-globe"></i><h3>طراحی وب</h3><p>وب‌سایت‌های سریع و ریسپانسیو</p></div>
+        <div class="card"><i class="fas fa-palette"></i><h3>طراحی لوگو</h3><p>هویت بصری منحصربه‌فرد</p></div>
+        <div class="card"><i class="fas fa-mobile-alt"></i><h3>UI/UX</h3><p>تجربه کاربری روان</p></div>
+        <div class="card"><i class="fas fa-layer-group"></i><h3>برندینگ</h3><p>استراتژی کامل برند</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Services, Portfolio, Request, Contact -->
-  <!-- (Same as previous version, with IDs for editing) -->
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title">نمونه کارها</h2>
+      <div class="grid">
+        <div class="card"><img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=600" style="width:100%;height:180px;object-fit:cover;border-radius:12px"><p style="margin-top:1rem">وب‌سایت شرکتی</p></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1551650975-87defd606db6?w=600" style="width:100%;height:180px;object-fit:cover;border-radius:12px"><p style="margin-top:1rem">لوگو</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Request Form -->
+  <section id="request">
+    <div class="container">
+      <h2 class="section-title">درخواست طراحی</h2>
+      <form action="https://formsubmit.co/h.reyhani@ymail.com" method="POST">
+        <input type="text" name="name" placeholder="نام کامل" required>
+        <input type="email" name="email" placeholder="ایمیل" required>
+        <textarea name="message" placeholder="توضیحات پروژه" rows="4" required></textarea>
+        <input type="hidden" name="_next" value="#request">
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit">ارسال درخواست</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">تماس</h2>
+      <div style="text-align:center">
+        <a href="#" style="font-size:1.8rem;margin:0 1rem;color:var(--accent)"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="font-size:1.8rem;margin:0 1rem;color:var(--accent)"><i class="fab fa-telegram"></i></a>
+      </div>
+      <p style="text-align:center;margin-top:2rem">h.reyhani@ymail.com | 09159779499</p>
+    </div>
+  </section>
 
   <!-- Admin Panel -->
   <div class="admin-panel" id="adminPanel">
     <div class="admin-content">
-      <span class="admin-close" id="adminClose">×</span>
-      <h2 style="text-align:center;margin-bottom:2rem;">صفحه تنظیمات</h2>
-      <div class="admin-section">
-        <h3>اطلاعات اصلی</h3>
-        <div class="admin-grid">
-          <input type="text" class="admin-input" id="adminSiteName" placeholder="نام سایت">
-          <input type="text" class="admin-input" id="adminHeroName" placeholder="نام در هدر">
-          <input type="url" class="admin-input" id="adminHeroImg" placeholder="لینک عکس پروفایل">
-          <textarea class="admin-input" id="adminHeroTagline" placeholder="تگ‌لاین"></textarea>
-          <textarea class="admin-input" id="adminHeroDesc" placeholder="توضیح کوتاه"></textarea>
-          <textarea class="admin-input" id="adminAboutBio" placeholder="بیوگرافی"></textarea>
-        </div>
-      </div>
-      <div class="admin-section">
-        <h3>مهارت‌ها</h3>
-        <div class="admin-grid">
-          <input type="text" class="admin-input" id="adminSkill1Name" placeholder="مهارت ۱">
-          <input type="number" class="admin-input" id="adminSkill1Percent" placeholder="درصد">
-          <input type="text" class="admin-input" id="adminSkill2Name" placeholder="مهارت ۲">
-          <input type="number" class="admin-input" id="adminSkill2Percent" placeholder="درصد">
-        </div>
-      </div>
-      <button class="admin-save" id="adminSave">ذخیره تغییرات</button>
+      <span class="admin-close" onclick="closeAdmin()">×</span>
+      <h3 style="text-align:center;margin-bottom:1.5rem">تنظیمات سایت</h3>
+      <input type="text" class="admin-input" id="adminSiteName" placeholder="نام سایت">
+      <input type="text" class="admin-input" id="adminHeroName" placeholder="نام در هدر">
+      <input type="url" class="admin-input" id="adminHeroImg" placeholder="لینک عکس پروفایل">
+      <input type="text" class="admin-input" id="adminHeroTitle" placeholder="عنوان">
+      <textarea class="admin-input" id="adminHeroDesc" placeholder="توضیح کوتاه"></textarea>
+      <textarea class="admin-input" id="adminAboutText" placeholder="متن درباره من"></textarea>
+      <button onclick="saveSettings()" style="margin-top:1rem;background:var(--accent);color:#fff;padding:1rem;border-radius:50px;border:none;cursor:pointer">ذخیره</button>
     </div>
   </div>
 
-  <!-- EmailJS Script -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    // EmailJS Init
-    emailjs.init("YOUR_PUBLIC_KEY"); // جایگزین با کلید عمومی EmailJS
-
     // Load Settings
-    const settings = JSON.parse(localStorage.getItem('portfolioSettings')) || {};
-    const applySettings = () => {
-      document.getElementById('siteName').textContent = settings.siteName || 'هادی ریحانی';
-      document.getElementById('heroName').textContent = settings.heroName || 'هادی ریحانی';
-      document.getElementById('heroTagline').textContent = settings.heroTagline || 'طراح وب و گرافیک';
-      document.getElementById('heroDesc').textContent = settings.heroDesc || 'خلق تجربه‌های دیجیتال زیبا...';
-      document.getElementById('heroImg').src = settings.heroImg || 'https://i.imgur.com/0z3fX5k.jpg';
-      document.getElementById('aboutBio').textContent = settings.aboutBio || 'من هادی ریحانی هستم...';
-      document.getElementById('skill1Name').textContent = settings.skill1Name || 'UI/UX Design';
-      document.getElementById('skill1Bar').style.width = (settings.skill1Percent || 95) + '%';
-      document.getElementById('skill2Name').textContent = settings.skill2Name || 'Web Design';
-      document.getElementById('skill2Bar').style.width = (settings.skill2Percent || 90) + '%';
-    };
-    applySettings();
+    const s = JSON.parse(localStorage.getItem('siteSettings')) || {};
+    if (s.siteName) document.getElementById('siteName').textContent = s.siteName;
+    if (s.heroName) document.getElementById('heroName').textContent = s.heroName;
+    if (s.heroImg) document.getElementById('heroImg').src = s.heroImg;
+    if (s.heroTitle) document.getElementById('heroTitle').textContent = s.heroTitle;
+    if (s.heroDesc) document.getElementById('heroDesc').textContent = s.heroDesc;
+    if (s.aboutText) document.getElementById('aboutText').textContent = s.aboutText;
 
-    // Admin Panel
-    document.getElementById('adminBtn').addEventListener('click', () => {
-      if (prompt('رمز عبور ادمین؟') === 'admin123') {
+    // Theme
+    function toggleTheme() {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    }
+
+    // Admin
+    function openAdmin() {
+      if (prompt('رمز عبور؟') === '1234') {
         document.getElementById('adminPanel').classList.add('show');
-        // Load current values
-        document.getElementById('adminSiteName').value = settings.siteName || '';
-        // ... fill others
+        document.getElementById('adminSiteName').value = s.siteName || '';
+        document.getElementById('adminHeroName').value = s.heroName || '';
+        document.getElementById('adminHeroImg').value = s.heroImg || '';
+        document.getElementById('adminHeroTitle').value = s.heroTitle || '';
+        document.getElementById('adminHeroDesc').value = s.heroDesc || '';
+        document.getElementById('adminAboutText').value = s.aboutText || '';
       }
-    });
-    document.getElementById('adminClose').addEventListener('click', () => {
+    }
+    function closeAdmin() {
       document.getElementById('adminPanel').classList.remove('show');
-    });
-    document.getElementById('adminSave').addEventListener('click', () => {
-      const newSettings = {
+    }
+    function saveSettings() {
+      const newS = {
         siteName: document.getElementById('adminSiteName').value,
         heroName: document.getElementById('adminHeroName').value,
         heroImg: document.getElementById('adminHeroImg').value,
-        heroTagline: document.getElementById('adminHeroTagline').value,
+        heroTitle: document.getElementById('adminHeroTitle').value,
         heroDesc: document.getElementById('adminHeroDesc').value,
-        aboutBio: document.getElementById('adminAboutBio').value,
-        skill1Name: document.getElementById('adminSkill1Name').value,
-        skill1Percent: document.getElementById('adminSkill1Percent').value,
-        skill2Name: document.getElementById('adminSkill2Name').value,
-        skill2Percent: document.getElementById('adminSkill2Percent').value,
+        aboutText: document.getElementById('adminAboutText').value,
       };
-      localStorage.setItem('portfolioSettings', JSON.stringify(newSettings));
-      applySettings();
-      alert('تنظیمات ذخیره شد!');
-      document.getElementById('adminPanel').classList.remove('show');
-    });
-
-    // Form Submit → Email
-    document.getElementById('requestForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-        .then(() => alert('درخواست شما به ایمیل h.reyhani@ymail.com ارسال شد!'))
-        .catch(() => alert('خطا در ارسال.'));
-      this.reset();
-    });
+      localStorage.setItem('siteSettings', JSON.stringify(newS));
+      location.reload();
+    }
   </script>
 </body>
 </html>
