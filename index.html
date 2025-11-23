@@ -1,285 +1,997 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هادی ریحانی – طراح UI/UX</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <title>Hadi Reyhani | Graphic & Web Designer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- فونت فارسی -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#ffffff;--text:#1a1a1a;--accent:#00c4b4;--accent-dark:#008b7e;--card:#f8f9fa;--border:#e0e0e0;
-      --glass:rgba(255,255,255,.1);--glass-b:rgba(255,255,255,.2);
+    :root {
+      --primary: #0fb8c9;
+      --primary-dark: #0a8fa0;
+      --accent: #6366f1;
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --radius-lg: 24px;
+      --radius-sm: 14px;
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.12);
     }
-    [data-theme="dark"]{
-      --bg:#0f172a;--text:#e2e8f0;--accent:#22d3ee;--accent-dark:#008b7e;--card:#1e293b;--border:#334155;
-      --glass:rgba(30,41,59,.5);--glass-b:rgba(255,255,255,.1);
+
+    * {
+      box-sizing: border-box;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;transition:all .4s;overflow-x:hidden}
-    .container{max-width:1240px;margin:auto;padding:0 1.5rem}
-    section{padding:6rem 0}
 
-    /* Navbar */
-    nav{position:fixed;top:0;width:100%;background:var(--card);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000}
-    .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
-    .logo{font-weight:700;font-size:1.6rem;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .nav-links{display:flex;gap:2rem}
-    .nav-links a{color:var(--text);font-weight:500;transition:.3s;position:relative}
-    .nav-links a::after{content:"";position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--accent);transition:.3s}
-    .nav-links a:hover::after{width:100%}
-
-    /* Hero */
-    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;position:relative;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.15),transparent 50%);pointer-events:none}
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-    .hero-text h1{font-size:3.8rem;margin-bottom:.6rem;font-weight:700}
-    .hero-text p{font-size:1.2rem;max-width:500px;margin-bottom:2rem}
-    .btn{padding:1rem 2.4rem;border-radius:50px;font-weight:600;transition:.4s;display:inline-flex;align-items:center;gap:.6rem}
-    .btn.primary{background:#fff;color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.15)}
-    .btn.secondary{border:2px solid #fff;color:#fff}
-    .btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,196,180,.3)}
-    .hero-img img{width:100%;max-width:420px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
-
-    /* Section Title */
-    .section-title{text-align:center;font-size:2.4rem;margin-bottom:3rem;font-weight:600;position:relative}
-    .section-title::after{content:"";width:80px;height:4px;background:var(--accent);position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);border-radius:2px}
-
-    /* Portfolio Grid */
-    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
-    .project-card{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:.5s;cursor:pointer}
-    .project-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,196,180,.15);border-color:var(--accent)}
-    .project-img{position:relative;overflow:hidden}
-    .project-img img{width:100%;height:220px;object-fit:cover;transition:.6s}
-    .project-card:hover .project-img img{transform:scale(1.08)}
-    .project-info{padding:1.8rem}
-    .project-info h3{font-size:1.3rem;margin-bottom:.5rem;font-weight:600}
-    .project-info p{font-size:.95rem;color:#666;margin-bottom:1rem}
-    .project-tags{display:flex;gap:.5rem;flex-wrap:wrap}
-    .tag{background:var(--glass);backdrop-filter:blur(8px);padding:.3rem .8rem;border-radius:50px;font-size:.8rem;color:var(--text)}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:.4s}
-    .modal.show{opacity:1;pointer-events:all}
-    .modal-content{background:var(--card);max-width:900px;width:92%;max-height:92vh;overflow:auto;border-radius:20px;padding:2.5rem;position:relative;box-shadow:0 25px 50px rgba(0,0,0,.3)}
-    .modal-close{position:absolute;top:1.2rem;left:1.2rem;font-size:1.8rem;cursor:pointer;color:var(--text);transition:.3s}
-    .modal-close:hover{transform:rotate(90deg)}
-    .case-study img{width:100%;border-radius:14px;margin:1.5rem 0}
-    .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:2rem 0}
-    .step{background:var(--glass);backdrop-filter:blur(10px);padding:1.5rem;border-radius:16px;text-align:center;border:1px solid var(--glass-b)}
-    .step i{font-size:2rem;color:var(--accent);margin-bottom:.8rem}
-
-    /* About */
-    .about{text-align:center;padding:5rem 0}
-    .about img{width:160px;height:160px;border-radius:50%;border:6px solid var(--accent);margin-bottom:1.5rem}
-    .about p{max-width:700px;margin:auto;font-size:1.1rem}
-
-    /* Contact */
-    .contact{text-align:center;padding:5rem 0;background:var(--card);border-top:1px solid var(--border)}
-    .social a{font-size:2rem;margin:0 1rem;color:var(--accent);transition:.3s}
-    .social a:hover{transform:scale(1.2)}
-
-    /* Theme Toggle */
-    .theme-toggle{position:fixed;bottom:1.5rem;left:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.6rem 1rem;cursor:pointer;z-index:1000;transition:.3s;display:flex;align-items:center;gap:.5rem}
-    .theme-toggle:hover{transform:scale(1.1)}
-
-    /* Responsive */
-    @media(max-width:992px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero-text h1{font-size:2.8rem;text-align:center}
-      .hero-img{text-align:center}
+    body {
+      margin: 0;
+      font-family: "Vazirmatn", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f7fb 0, #f5f7fb 40%, #ffffff 100%);
+      color: var(--text-main);
+      line-height: 1.7;
     }
-    @media(max-width:600px){
-      .hero-text h1{font-size:2.2rem}
-      .process-steps{grid-template-columns:1fr}
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* --- HEADER & HERO --- */
+
+    header {
+      position: relative;
+      padding: 20px 0 80px;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(79, 209, 197, 0.14), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(99, 102, 241, 0.15), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: 0 12px 30px rgba(79, 209, 197, 0.5);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .logo-text span:last-child {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.3);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 55px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      padding: 9px 20px;
+      font-size: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease-out, border-color 0.15s ease-out;
+    }
+
+    .btn-outline:hover {
+      background: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-heading {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 0 0 12px;
+    }
+
+    .hero-heading span.highlight {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .hero-sub {
+      margin-bottom: 24px;
+      color: var(--text-muted);
+      max-width: 480px;
+      font-size: 14px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15, 184, 201, 0.08);
+      color: var(--primary-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-meta-item span:first-child {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 32px;
+      padding: 18px;
+      background: radial-gradient(circle at top right, rgba(99,102,241,0.12), transparent 40%),
+        linear-gradient(145deg, #ffffff, #e5f6ff);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-badge span.dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+    }
+
+    .hero-floating {
+      position: absolute;
+      top: -18px;
+      right: 24px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .hero-floating-icons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .stack-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #0f172a;
+      background: #e5e7eb;
+    }
+
+    .stack-badge.ps { background: #001e36; color: #60a5fa; }
+    .stack-badge.ca { background: #4f46e5; color: #e0f2fe; }
+    .stack-badge.wp { background: #1f2933; color: #38bdf8; }
+
+    /* --- SECTIONS --- */
+
+    section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(15, 184, 201, 0.08);
+      color: var(--primary-dark);
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 22px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), #eff6ff);
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ABOUT SECTION */
+
+    .about-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-box {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 22px 22px 24px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .about-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .about-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .stat-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    .about-mini {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      padding: 10px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mini-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    /* CONTACT / FORM */
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contact-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: #15803d;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .contact-highlight span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+    }
+
+    .contact-list li {
+      margin-bottom: 6px;
+    }
+
+    .contact-form {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 22px 20px 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: #4b5563;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      padding: 9px 11px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.12s ease-out, box-shadow 0.12s ease-out;
+      background: #f9fafb;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(15, 184, 201, 0.25);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 26px 0 18px;
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    footer span {
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .about-wrapper,
+      .contact-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-heading {
+        font-size: 26px;
+      }
+
+      header {
+        padding-bottom: 50px;
+      }
     }
   </style>
 </head>
-<body data-theme="light">
+<body>
 
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" onclick="document.body.setAttribute('data-theme', document.body.getAttribute('data-theme')==='dark'?'light':'dark')">
-    <i class="fas fa-moon"></i>
-  </button>
+  <!-- HEADER & HERO -->
+  <header id="top">
+    <div class="container">
 
-  <!-- Navbar -->
-  <nav>
-    <div class="container nav-inner">
-      <div class="logo">هادی ریحانی</div>
-      <div class="nav-links">
-        <a href="#home">خانه</a>
-        <a href="#portfolio">نمونه کارها</a>
-        <a href="#about">درباره</a>
-        <a href="#contact">تماس</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <h1>طراح UI/UX</h1>
-        <p>خلق تجربه‌های کاربری روان، زیبا و هدفمند برای اپلیکیشن‌ها و وب‌سایت‌ها</p>
-        <div>
-          <a href="#portfolio" class="btn primary">مشاهده پروژه‌ها</a>
-          <a href="#contact" class="btn secondary">شروع همکاری</a>
+      <nav>
+        <div class="logo">
+          <div class="logo-mark">H</div>
+          <div class="logo-text">
+            <span>PORTFOLIO</span>
+            <span>Hadi Reyhani</span>
+          </div>
         </div>
+
+        <div class="nav-links">
+          <a href="#services">خدمات</a>
+          <a href="#about">درباره من</a>
+          <a href="#portfolio">نمونه‌کار</a>
+          <a href="#contact">درخواست پروژه</a>
+        </div>
+
+        <div class="nav-cta">
+          <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            گفتگوی همکاری
+          </button>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div class="hero-content">
+          <h1 class="hero-heading">
+            طراحی
+            <span class="highlight">گرافیک و وب‌سایت‌های مدرن</span>
+            برای برندهای حرفه‌ای
+          </h1>
+
+          <p class="hero-sub">
+            من هادی ریحانی هستم؛ طراح گرافیک و وب. روی طراحی وب‌سایت‌های
+            مینیمال، لندینگ‌پیج‌های فروش، هویت بصری برند و محتوای شبکه‌های
+            اجتماعی تمرکز می‌کنم.
+          </p>
+
+          <div class="hero-tags">
+            <span class="chip"><span class="dot"></span> طراحی رابط و تجربه کاربری</span>
+            <span class="chip"><span class="dot"></span> طراحی لندینگ‌پیج و سایت وردپرسی</span>
+            <span class="chip"><span class="dot"></span> طراحی کاور، پوستر و شبکه‌های اجتماعی</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              ثبت درخواست طراحی
+            </button>
+            <button class="btn-outline" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
+              مشاهده چند نمونه‌کار
+            </button>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span>۳+ سال</span>
+              <span>تجربه حرفه‌ای طراحی</span>
+            </div>
+            <div class="hero-meta-item">
+              <span>۵۰+ پروژه</span>
+              <span>برای برندها و کسب‌وکارهای مختلف</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <!-- اینجا عکس خودتان را قرار دهید -->
+              <!-- فایل تصویر را مثلاً کنار این فایل با نام hadi-reyhani.jpg ذخیره کنید -->
+              <img src="hadi-reyhani.jpg" alt="Profile photo" />
+            </div>
+            <div class="hero-badge">
+              <span class="dot"></span>
+              <div>
+                <div style="font-size:11px;">طراح گرافیک و وب</div>
+                <div style="font-size:10px; color:#9ca3af;">تمرکز روی جزئیات و تجربه کاربر</div>
+              </div>
+            </div>
+
+            <div class="hero-floating">
+              <div class="hero-floating-icons">
+                <div class="stack-badge ps">Ps</div>
+                <div class="stack-badge ca">C</div>
+                <div class="stack-badge wp">W</div>
+              </div>
+              <div>
+                <div style="font-size:11px; font-weight:600;">Photoshop · Canva · WordPress</div>
+                <div style="font-size:10px; color:#6b7280;">ابزارهای اصلی من در طراحی</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1562577308-9e68e98c4e9b?w=800" alt="UI/UX Design">
+
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          خدمات من در طراحی
+        </div>
+        <h2 class="section-title">چه چیزهایی برای شما طراحی می‌کنم؟</h2>
+        <p class="section-sub">
+          از طراحی هویت بصری تا وب‌سایت کامل؛ می‌توانید کل مسیر طراحی برند و حضور آنلاین‌تان را به من بسپارید.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">هویت بصری و برندینگ</div>
+          <div class="card-text">
+            طراحی لوگو، پالت رنگ، تایپوگرافی و گایدلاین ساده برند برای داشتن ظاهری منسجم در همه جا.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">💻</div>
+          <div class="card-title">طراحی وب‌سایت و لندینگ‌پیج</div>
+          <div class="card-text">
+            طراحی UI و پیاده‌سازی در وردپرس یا به‌صورت لندینگ‌پیج تک‌صفحه‌ای، با تمرکز روی فروش و تبدیل کاربر.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">شبکه‌های اجتماعی و تبلیغات</div>
+          <div class="card-text">
+            طراحی پست، استوری، کاور هایلایت، بنر تبلیغاتی، کاور موزیک و پوسترهای جذاب برای کمپین‌ها.
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio -->
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">درباره من</div>
+        <h2 class="section-title">یک طراح که به جزئیات اهمیت می‌دهد</h2>
+      </div>
+
+      <div class="about-wrapper">
+        <div class="about-box">
+          <h3>چطور به برند شما کمک می‌کنم؟</h3>
+          <p>
+            برای من، طراحی فقط زیبا بودن نیست؛ هر صفحه و هر تصویر باید هدف مشخصی داشته
+            باشد: جذب مخاطب، توضیح راحت‌تر پیام، یا تبدیل بازدیدکننده به مشتری.
+          </p>
+          <p>
+            قبل از شروع طراحی، به‌صورت کوتاه در مورد هدف، مخاطب و فضای برند شما صحبت
+            می‌کنم تا طرح نهایی دقیقاً شبیه چیزی باشد که در ذهن‌تان است؛ یا حتی بهتر.
+          </p>
+
+          <div class="about-stats">
+            <span class="stat-pill">طراحی برای وب، موبایل و پرینت</span>
+            <span class="stat-pill">خروجی آماده چاپ و انتشار</span>
+            <span class="stat-pill">ارتباط مداوم تا تأیید نهایی</span>
+          </div>
+        </div>
+
+        <div class="about-mini">
+          <div class="mini-card">
+            <span class="mini-dot"></span>
+            <div>
+              <div style="font-size:12px; font-weight:600;">سبک طراحی مدرن، مینیمال و تمیز</div>
+              <div style="font-size:11px; color:#6b7280;">مناسب برندهای حرفه‌ای و استارتاپ‌ها</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <span class="mini-dot"></span>
+            <div>
+              <div style="font-size:12px; font-weight:600;">همکاری مرحله‌به‌مرحله</div>
+              <div style="font-size:11px; color:#6b7280;">ارسال پیش‌نمایش و اعمال اصلاحات تا رسیدن به نتیجه نهایی</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <span class="mini-dot"></span>
+            <div>
+              <div style="font-size:12px; font-weight:600;">خروجی در فرمت‌های استاندارد</div>
+              <div style="font-size:11px; color:#6b7280;">PNG, JPG, PDF, PSD و فایل لایه‌باز در صورت نیاز</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PORTFOLIO (SIMPLE PLACEHOLDER) -->
   <section id="portfolio">
     <div class="container">
-      <h2 class="section-title">نمونه کارها</h2>
-      <div class="portfolio-grid">
-        <div class="project-card" onclick="openCaseStudy(0)">
-          <div class="project-img"><img src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800" alt=""></div>
-          <div class="project-info">
-            <h3>اپلیکیشن بانکی</h3>
-            <p>طراحی کامل UI/UX با Figma و تست کاربری</p>
-            <div class="project-tags">
-              <span class="tag">Figma</span>
-              <span class="tag">User Research</span>
-              <span class="tag">Mobile</span>
-            </div>
+      <div class="section-header">
+        <div class="section-label">نمونه‌کارها</div>
+        <h2 class="section-title">چند سبک مختلف طراحی</h2>
+        <p class="section-sub">
+          در این بخش می‌توانید چند نوع طراحی که انجام می‌دهم را ببینید. جای این تصاویر را بعداً با نمونه‌کارهای واقعی خودتان پر کنید.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">لندینگ‌پیج محصول</div>
+          <div class="card-text">
+            صفحه فرود تمیز و مینیمال برای معرفی یک محصول یا سرویس، با تمرکز روی CTA و تبدیل کاربر.
           </div>
         </div>
-        <div class="project-card" onclick="openCaseStudy(1)">
-          <div class="project-img"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800" alt=""></div>
-          <div class="project-info">
-            <h3>وب‌سایت فروشگاهی</h3>
-            <p>بهینه‌سازی تجربه خرید و افزایش نرخ تبدیل</p>
-            <div class="project-tags">
-              <span class="tag">E-commerce</span>
-              <span class="tag">A/B Testing</span>
-              <span class="tag">Responsive</span>
-            </div>
+        <div class="card">
+          <div class="card-title">هویت بصری یک برند شخصی</div>
+          <div class="card-text">
+            طراحی رنگ، لوگو، کارت ویزیت و قالب پست اینستاگرام برای یک برند شخصی یا اینفلوئنسر.
           </div>
         </div>
-        <div class="project-card" onclick="openCaseStudy(2)">
-          <div class="project-img"><img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800" alt=""></div>
-          <div class="project-info">
-            <h3>داشبورد مدیریتی</h3>
-            <p>طراحی داشبورد پیچیده با داده‌های واقعی</p>
-            <div class="project-tags">
-              <span class="tag">Dashboard</span>
-              <span class="tag">Data Viz</span>
-              <span class="tag">Dark Mode</span>
-            </div>
+        <div class="card">
+          <div class="card-title">پک کامل شبکه اجتماعی</div>
+          <div class="card-text">
+            طراحی پست، استوری، کاور هایلایت، بنر تبلیغاتی و تم کلی پیج برای حضور حرفه‌ای.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="about">
+  <!-- CONTACT / FORM -->
+  <section id="contact">
     <div class="container">
-      <img src="https://i.imgur.com/0z3fX5k.jpg" alt="هادی ریحانی">
-      <h2>هادی ریحانی</h2>
-      <p>طراح UI/UX با بیش از ۸ سال تجربه. تخصص در تحقیق کاربر، وایرفریم، پروتوتایپ و تست کاربری. همیشه به دنبال راه‌حل‌های هوشمند و کاربرمحور هستم.</p>
+      <div class="section-header">
+        <div class="section-label">شروع یک همکاری</div>
+        <h2 class="section-title">درخواست طراحی خود را ارسال کنید</h2>
+        <p class="section-sub">
+          فرم زیر را پر کنید تا جزئیات پروژه‌تان را بررسی کنم و در سریع‌ترین زمان ممکن با شما تماس بگیرم.
+        </p>
+      </div>
+
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="contact-highlight">
+            <span></span>
+            پاسخ‌دهی در کوتاه‌ترین زمان ممکن
+          </div>
+          <p>
+            لطفاً تا حد امکان، نوع طراحی و سلیقه‌تان را دقیق توضیح دهید
+            (مثلاً: مینیمال، رنگ‌های تیره، شبیه فلان نمونه و...).
+          </p>
+          <ul class="contact-list">
+            <li>• طراحی وب‌سایت، لندینگ‌پیج و صفحات فروش</li>
+            <li>• طراحی هویت بصری، لوگو و ست اداری</li>
+            <li>• طراحی محتوا برای اینستاگرام، تلگرام و تبلیغات دیجیتال</li>
+            <li>• و هر ایده‌ی گرافیکی دیگری که در ذهن‌تان دارید</li>
+          </ul>
+        </div>
+
+        <!-- فرم ارسال درخواست -->
+        <!-- از سرویس formsubmit.co استفاده شده؛ فقط کافی است یکبار فرم را بفرستید تا ایمیل شما تأیید شود -->
+        <form class="contact-form"
+              action="https://formsubmit.co/h.reyhani@ymail.cm"
+              method="POST">
+          <!-- تنظیمات FormSubmit -->
+          <input type="hidden" name="_subject" value="درخواست جدید طراحی از سایت شخصی" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">نام و نام خانوادگی</label>
+              <input type="text" id="name" name="نام" required />
+            </div>
+            <div class="form-group">
+              <label for="email">ایمیل یا آیدی تلگرام / اینستاگرام</label>
+              <input type="text" id="email" name="راه ارتباطی" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="project-type">نوع پروژه</label>
+              <select id="project-type" name="نوع پروژه" required>
+                <option value="">انتخاب کنید…</option>
+                <option value="طراحی وب‌سایت یا لندینگ‌پیج">طراحی وب‌سایت / لندینگ‌پیج</option>
+                <option value="طراحی هویت بصری و لوگو">هویت بصری و لوگو</option>
+                <option value="طراحی شبکه‌های اجتماعی">شبکه‌های اجتماعی و تبلیغات</option>
+                <option value="سایر">سایر (در توضیحات بنویسید)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="budget">بودجه حدودی (اختیاری)</label>
+              <select id="budget" name="بودجه حدودی">
+                <option value="">مهم نیست / بعداً صحبت می‌کنیم</option>
+                <option value="کمتر از ۵ میلیون">کمتر از ۵ میلیون تومان</option>
+                <option value="۵ تا ۱۵ میلیون">۵ تا ۱۵ میلیون تومان</option>
+                <option value="بیشتر از ۱۵ میلیون">بیشتر از ۱۵ میلیون تومان</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="details">توضیحات پروژه</label>
+            <textarea id="details" name="جزئیات پروژه" placeholder="در مورد سبک طراحی، رنگ‌ها، نمونه‌های مورد علاقه‌تان و هر چیزی که مهم است بنویسید…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+            ارسال درخواست طراحی
+          </button>
+
+          <div class="form-footnote">
+            پس از ارسال فرم، یک نسخه از اطلاعات به ایمیل شما هم ارسال می‌شود (در صورتی‌که در فرم وارد کرده باشید).
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="contact">
+  <footer>
     <div class="container">
-      <h2>شروع همکاری</h2>
-      <div class="social">
-        <a href="#"><i class="fab fa-dribbble"></i></a>
-        <a href="#"><i class="fab fa-behance"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-telegram"></i></a>
-      </div>
-      <p style="margin-top:1.5rem">h.reyhani@ymail.com | 09159779499</p>
+      ©
+      <span>Hadi Reyhani</span>
+      — طراحی گرافیک و وب‌سایت‌های مدرن
     </div>
-  </section>
-
-  <!-- Modal Case Study -->
-  <div class="modal" id="caseModal">
-    <div class="modal-content">
-      <span class="modal-close" onclick="document.getElementById('caseModal').classList.remove('show')">×</span>
-      <div id="caseContent">
-        <!-- Content loaded by JS -->
-      </div>
-    </div>
-  </div>
+  </footer>
 
   <script>
-    const cases = [
-      {
-        title: "اپلیکیشن بانکی",
-        desc: "طراحی کامل یک اپلیکیشن بانکی با تمرکز بر امنیت و تجربه کاربری روان. شامل تحقیق کاربر، وایرفریم، پروتوتایپ و تست.",
-        images: [
-          "https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800"
-        ],
-        process: [
-          {icon:"fas fa-search", title:"تحقیق کاربر", desc:"مصاحبه با ۳۰ کاربر"},
-          {icon:"fas fa-drafting-compass", title:"وایرفریم", desc:"ساختار اولیه"},
-          {icon:"fas fa-paint-brush", title:"طراحی UI", desc:"ماکاپ با Figma"},
-          {icon:"fas fa-users", title:"تست کاربری", desc:"بهبود بر اساس فیدبک"}
-        ],
-        result: "افزایش ۴۲٪ نرخ تکمیل تراکنش"
-      },
-      {
-        title: "وب‌سایت فروشگاهی",
-        desc: "بهینه‌سازی تجربه خرید یک فروشگاه آنلاین. تمرکز بر سرعت، فیلترها و فرآیند پرداخت.",
-        images: [
-          "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
-          "https://images.unsplash.com/photo-1556742111-a381df1865a2?w=800"
-        ],
-        process: [
-          {icon:"fas fa-chart-line", title:"تحلیل رقبا", desc:"بررسی ۱۰ فروشگاه"},
-          {icon:"fas fa-sitemap", title:"معماری اطلاعات", desc:"بهبود ناوبری"},
-          {icon:"fas fa-mobile-alt", title:"ریسپانسیو", desc:"طراحی موبایل"},
-          {icon:"fas fa-stopwatch", title:"تست سرعت", desc:"بهینه‌سازی لود"}
-        ],
-        result: "کاهش ۶۵٪ نرخ ترک سبد خرید"
-      },
-      {
-        title: "داشبورد مدیریتی",
-        desc: "طراحی داشبورد پیچیده برای مدیران با داده‌های زنده و قابلیت سفارشی‌سازی.",
-        images: [
-          "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800",
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
-        ],
-        process: [
-          {icon:"fas fa-database", title:"داده‌ها", desc:"اتصال به API"},
-          {icon:"fas fa-chart-bar", title:"ویژوال‌سازی", desc:"نمودارهای تعاملی"},
-          {icon:"fas fa-palette", title:"تم دارک", desc:"حالت شب"},
-          {icon:"fas fa-cog", title:"سفارشی‌سازی", desc:"ویجت‌های قابل جابجایی"}
-        ],
-        result: "کاهش ۷۰٪ زمان تحلیل داده"
-      }
-    ];
-
-    function openCaseStudy(i) {
-      const c = cases[i];
-      const content = `
-        <h2>${c.title}</h2>
-        <p style="margin:1.5rem 0;font-size:1.1rem;">${c.desc}</p>
-        ${c.images.map(src => `<img src="${src}" alt="">`).join('')}
-        <h3 style="margin:2rem 0 1.5rem;">فرآیند طراحی</h3>
-        <div class="process-steps">
-          ${c.process.map(step => `
-            <div class="step">
-              <i class="${step.icon}"></i>
-              <h4>${step.title}</h4>
-              <p>${step.desc}</p>
-            </div>
-          `).join('')}
-        </div>
-        <p style="margin-top:2rem;font-weight:600;color:var(--accent);font-size:1.2rem;">نتیجه: ${c.result}</p>
-      `;
-      document.getElementById('caseContent').innerHTML = content;
-      document.getElementById('caseModal').classList.add('show');
-    }
+    // اسکرول نرم برای لینک‌های منو (برای مرورگرهایی که پشتیبانی نمی‌کنند)
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener("click", function (e) {
+        var targetId = this.getAttribute("href").substring(1);
+        var target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
   </script>
 </body>
 </html>
